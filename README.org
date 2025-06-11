@@ -1,0 +1,334 @@
+* 🔨 Working in Proress(文档施工中ing.....)
+
+** 💡 MEME
+
+[[./MEME/EmacsTheTrueEditor.png]]
+
+** 📰 一些负责任的话
+
+请真的不要滥抄我个人的配置，很负责任地说这并不是说劝退什么的
+
+更加重要的原因，只是因为符合个人习惯的不一定会适合您的习惯
+
+还是推荐您先观看一下 [[https://www.bilibili.com/video/BV1Fb421v7ZV][daily tsoding - one thing every programmer must have]] 这个视频
+
+*仅供参考*
+
+** 🎑 GNU Emacs快捷键风格
+
+| 序号 | 快捷键前缀(prefix-key) | 解释意义                       |
+|------+-----------------------+-------------------------------|
+|    1 | ~C-z C-z~             | *<custom>*                    |
+|    2 | ~C-z C-p~             | *<p>* rocess                  |
+|    3 | ~C-z C-s~             | *<s>* witch window            |
+|    4 | ~C-z C-t~             | *<t>* heme                    |
+|    5 | ~C-z C-b~             | *<b>* uffer                   |
+|    6 | ~C-z C-w~             | resize *<w>* indow            |
+|    7 | ~C-z C-d~             | *<d>* ashboard & *<d> irvish* |
+|    8 | ~C-z C-x~             | te *<x>* t                    |
+|    9 | ~C-z C-n~             | de *<n>* ote                  |
+|   10 | ~C-z C-a~             | *<a>* genda                   |
+|   11 | ~C-z C-o~             | *<o>* rg-mode                 |
+|   12 | ~C-z C-m~             | e *<m>* ms                    |
+
+** 🔑 有趣的实现
+
+*** 1. GNU Emacs总使用时长
+
+从 ~2025年 01月 26日 星期日 13:55:28 CST~ 重新开始累计
+
+#+begin_quote
+Accompanying With GNU Emacs: 202 hours, 59 minutes, 49 seconds
+#+end_quote
+
+实现过程(展示代码，从而来证明我自己并没有乱写时间上去，因为每次的时间都依赖于 ~(emacs-uptime)~ 此el函数来获取)
+
+*bash方面*
+#+begin_src sh
+  #!/bin/bash
+
+  # 基本路径配置
+  user="une"
+  path1=".config/emacs/archive"
+  path2=".config/emacs/elisp/site-lisp/sh"
+  filename="uptime"
+
+  # 存储文件路径
+  file1="/home/${user}/${path1}/${filename}"
+  file2="/home/${user}/${path2}/${filename}"
+
+  # 初始化总时间
+  total_seconds=0
+
+  # 逐行读取文件内容
+  while IFS= read -r line; do
+    # 匹配并提取小时、分钟和秒
+    if [[ "$line" =~ Uptime:\ ([0-9]+)\ hours?,\ ([0-9]+)\ minutes?,\ ([0-9]+)\ seconds? ]]; then
+      hours=${BASH_REMATCH[1]}
+      minutes=${BASH_REMATCH[2]}
+      seconds=${BASH_REMATCH[3]}
+    elif [[ "$line" =~ Uptime:\ ([0-9]+)\ minutes?,\ ([0-9]+)\ seconds? ]]; then
+      hours=0
+      minutes=${BASH_REMATCH[1]}
+      seconds=${BASH_REMATCH[2]}
+    elif [[ "$line" =~ Uptime:\ ([0-9]+)\ seconds? ]]; then
+      hours=0
+      minutes=0
+      seconds=${BASH_REMATCH[1]}
+    else
+      # 如果不匹配任何已知格式，跳过这行
+      continue
+    fi
+
+    # 将时间转换为秒
+    total_seconds=$((total_seconds + hours * 3600 + minutes * 60 + seconds))
+
+  done < "$file1"
+
+  # 可选：将秒数转换为小时:分钟:秒 格式
+  total_hours=$((total_seconds / 3600))
+  remaining_minutes=$(((total_seconds % 3600) / 60))
+  remaining_seconds=$((total_seconds % 60))
+
+  # 输出总时间
+  echo "Accompanying With GNU Emacs: $total_hours hours, $remaining_minutes minutes, $remaining_seconds seconds"
+  echo "Accompanying With GNU Emacs: $total_hours hours, $remaining_minutes minutes, $remaining_seconds seconds" > "$file2"  
+#+end_src
+
+*elisp方面*
+#+begin_src elisp
+  ;; =======================================
+  ;; 路径变量 (~/.config/emacs/elisp/basic/basic-file.el)
+  ;; =======================================  
+  (defvar directory-site-lisp               "elisp/site-lisp/sh/")                     ; emacs配置文件路径的modeline部分
+
+  ;; =======================================
+  ;; 手动更新已使用的GNU Emacs累加时长 (~/.config/emacs/elisp/custom/custom-defun.el)
+  ;; =======================================
+  (defun my-save-emacs-uptime ()
+    "通过设置钩子hooks，在每次退出Emacs后，自动保存emacs-uptime数据到指定文件内"
+    (let ((uptime (emacs-uptime)))
+      (with-temp-buffer
+        (insert (format "Uptime: %s\n" uptime))
+        (append-to-file (point-min) (point-max)  (concat user-emacs-directory directory-emacs-archive "uptime")))))
+
+  (defun my-show-emacs-uptime ()
+    "通过site-lisp的sh脚本实现，获取Emacs的累计使用总时长"
+    (interactive)
+    (let ((uptime-output
+           (string-trim (shell-command-to-string
+                         (concat user-emacs-directory directory-site-lisp "calculate-uptime.sh")))))
+      (insert uptime-output)))
+
+
+  ;; =======================================
+  ;; 更新 calculate-uptime.sh 脚本输出的钩子 (~/.config/emacs/elisp/hooks/hooks-hook.el)
+  ;; =======================================
+  (add-hook 'kill-emacs-hook 'my-save-emacs-uptime)                            ; 在退出Emacs时保存当前uptime  
+#+end_src
+
+*我自己的改进思路*
+
+当前必须退出后1个Emacs进程后，才能统计本次的累计使用总时长，这是因为保存了的是逐渐递增的emacs-uptime，而非增量
+
++ 保存的是增量emacs-uptime-DELTA，而不是逐渐递增的emacs-uptime
+
+  #+begin_quote
+  抽象一个根据 ~(emacs-uptime)~ 的变量，作为增量时间 ~(defvar emacs-uptime-delta "")~
+
+  使得每次执行函数 ~my-save-emacs-uptime~ 后
+
+  能模仿emacs-uptime的字符串(如Uptime: 1 hours, 55 minutes, 33 seconds)
+
+  保存到指定的文件中
+
+  (以后有空再弄.....因为这几天我自己已经配置了接近20小时的GNU Emacs了......下次再弄下次再弄)
+  #+end_quote
+
+  
+*** 2. 在modeline上展示 [议程数量] 的信息
+
+*可能哪里会出现一点点错误，但大致上的逻辑就是这样*
+
+#+begin_src elisp
+;; ==============================================
+;; 设置org-mode必要的关键词
+;; ==============================================
+(setq org-todo-keywords
+      '((sequence "TODO" "DOING" "WAIT" "DONE" "MY")))
+
+  ;; ==============================================
+  ;; 生产数据的过程
+  ;; ==============================================
+  ;; 必要的变量信息
+  (defvar file-org-agenda-files               "/home/user/directory-114514/1919810.org" "[文件]: 必须是org文件，因为需要使用org-mode")
+  (defvar modeline-agenda-todo-count 0)
+  (defvar modeline-agenda-doing-count 0)
+  (defvar modeline-agenda-wait-count 0)
+  (defvar modeline-agenda-file-name "")
+
+  ;; 设置函数
+  (defun kivnn/count-agenda-file-tasks (file-path)
+    "更新指定路径议程文件的agenda信息"
+    (interactive)
+    (setq modeline-agenda-todo-count 0)
+    (setq modeline-agenda-doing-count 0)
+    (setq modeline-agenda-wait-count 0)
+    (setq modeline-agenda-file-name (file-name-nondirectory file-path))
+    ;; 打开临时buffer
+    (with-temp-buffer
+      (insert-file-contents file-path)
+      (goto-char (point-min))
+      (while (re-search-forward org-heading-regexp nil t)
+        (let ((headline (match-string 0)))
+          (cond
+           ((string-match-p "\\*+ TODO" headline) (setq modeline-agenda-todo-count (1+ modeline-agenda-todo-count)))
+           ((string-match-p "\\*+ DOING" headline) (setq modeline-agenda-doing-count (1+ modeline-agenda-doing-count)))
+           ((string-match-p "\\*+ WAIT" headline) (setq modeline-agenda-wait-count (1+ modeline-agenda-wait-count))))))))
+
+  ;; 让上述函数只对特定指定文件生效
+  ;; 从而统计所有的 "*+ TODO、*+ DOING、*+ WAIT" 的标题数量
+  ;; 并更新到 "modeline-agenda-todo-count modeline-agenda-doing-count modeline-agenda-wait-count" 变量上
+  (defun kivnn/update-modeline-agenda-file-tasks ()
+    "统计指定文件2025.org的任务"
+    (kivnn/count-agenda-file-tasks file-org-agenda-files))
+
+
+  ;; ==============================================
+  ;; 展示数据的过程
+  ;; ==============================================
+  ;; 将 "modeline-agenda-todo-count modeline-agenda-doing-count modeline-agenda-wait-count" 变量设置在modeline上
+  (defun kivnn/update-modeline-with-all-scripts ()
+    "显示modeline信息"
+    (setq global-mode-string
+          (list
+           "  "
+           (format "󰄒 TODO %d " modeline-agenda-todo-count)
+           (format "󱞿 DOING %d " modeline-agenda-doing-count)
+           (format "󰝕 WAIT %d " modeline-agenda-wait-count)
+           "-  "
+           modeline-agenda-file-name))
+    (setq-default mode-line-format
+                  '("%e"
+                    ;; a lot of things                    
+                    global-mode-string
+                    ;; a lot of things
+                    )))
+
+  ;; 自动版
+  (run-at-time "0 sec" 1800  'kivnn/update-modeline-agenda-file-tasks)   ; 每30分钟更新一次file-org-agenda-files变量 的指定文件的 "*+ TODO、*+ DOING、*+ WAIT" 的标题数量
+
+  ;; 手动版
+  (defun kivnn/update-modeline-all-information ()
+    "手动更新状态栏上的所有信息"
+    (interactive)
+    (kivnn/update-modeline-agenda-file-tasks) ; 手动读取 file-org-agenda-files变量 的指定文件的 "*+ TODO、*+ DOING、*+ WAIT" 的标题数量
+    (kivnn/update-modeline-with-all-scripts)) ; 然后更新modeline状态栏
+
+  ;; 设置快捷键
+  (global-set-key (kbd "C-114514")                   'kivnn/update-modeline-output-agenda-tasks)   
+#+end_src
+
+*** 3. 去除首次打开的 ~*Message*~ 与 ~*scratch*~
+
+#+begin_src elisp
+  (setq message-log-max nil)
+
+  (defun kivnn/dashboard-mode-hook ()
+    "保证一直关闭scratch，保证只关闭第一次Message"
+    (setq-default kivnn/kill-scratch-buffer nil)
+    (when (get-buffer "*scratch*") (kill-buffer "*scratch*"))
+    (unless kivnn/kill-scratch-buffer
+      (when (get-buffer "*Messages*")
+        (kill-buffer "*Messages*")
+        (setq-default kivnn/kill-scratch-buffer t))))
+
+  (defun kivnn/view-echo-area-messages ()
+    "设置message-log-max并打开*Message*的buffer"
+    (interactive)
+    (setq message-log-max 1000)
+    (view-echo-area-messages))
+
+  ;; 设置快捷键
+  (global-set-key (kbd "C-114514")                   'kivnn/view-echo-area-messages)
+#+end_src
+
+*** 4. 含金量非常足的在org-mode里渲染含中文的LaTeX片段
+
+*相当于对LaTeX的渲染程序进行了排列组合: 无视fontspec包的定死字体大小的限制，强制渲染指定字体大小9pt的LaTeX片段*
+
+缺点
+- 方案是pdf转png，相比于svg来说可能较吃性能，但png兼容性更好
+  
+- \( 需手动将光标放在此上下文范围内，然后执行函数才能渲染 \)
+
+#+begin_src elisp
+  (add-to-list 'org-preview-latex-process-alist
+               '(xelatex-chinese
+                 :programs ("xelatex" "convert")
+                 :description "pdf > png"
+                 :message "you need to install the programs: xelatex and dvipng."
+                 :image-input-type "pdf"
+                 :image-output-type "png"
+                 :image-size-adjust (1.7 . 1.5)
+                 :latex-header "\\documentclass[11pt]{standalone}
+                                \\usepackage{fontspec}
+                                \\setmainfont{Source Han Sans CN}
+                                \\setsansfont{Source Han Sans CN}
+                                \\setmonofont{Source Han Sans CN}
+                                \\usepackage[usenames]{color}
+                                \\usepackage{amsmath}
+                                \\usepackage{extpfeil}
+                                \\pagestyle{empty}"
+                 :latex-compiler ("xelatex -interaction nonstopmode -output-directory %o %f")
+                 :image-converter ("convert -density 90 -background '#FFFFFF' -flatten -quality 100 %f %O")))
+
+  (defvar variable-latex-fragment-left-bound  "\\\("                                          "[变量]: latex-fragment的左边界")
+  (defvar variable-latex-fragment-right-bound "\\\)"                                          "[变量]: latex-fragment的右边界")
+
+  (defun kivnn/org-latex-preview-format ()
+    "渲染中文LaTeX片段之前的格式化"
+    (interactive)
+    ;; 找到左边界
+    (let ((thing (thing-at-point 'line t)))
+      (if (and thing (string-match (concat variable-latex-fragment-left-bound ".*" variable-latex-fragment-right-bound) thing))
+          (search-backward variable-latex-fragment-left-bound nil t)
+        (message "no such equation, please check again...")))
+    (forward-char 2)
+    (delete-all-space)
+    ;; 找到右边界
+    (let ((thing (thing-at-point 'line t)))
+      (if (and thing (string-match (concat variable-latex-fragment-left-bound ".*" variable-latex-fragment-right-bound) thing))
+          (search-forward variable-latex-fragment-right-bound nil t)
+        (message "no such equation, please check again...")))
+    (backward-char 3)
+    (delete-all-space))
+
+  (defun kivnn/org-latex-preview-engine ()
+    "渲染中文LaTeX片段"
+    (interactive)
+    (let* ((latex-code (thing-at-point 'line t))
+           (is-utf8 (and latex-code
+                         (string-match (concat variable-latex-fragment-left-bound ".*" variable-latex-fragment-right-bound) latex-code)
+                         (string-match-p "[^\x00-\x7F]" latex-code))))
+      (if s-utf8
+                                          ; 如果包含 UTF-8 字符，就使用 xelatex-chinese 引擎
+          progn
+        (setq org-preview-latex-default-process 'xelatex-chinese)
+        (message "目前使用了xelatex-chinese引擎渲染此LaTeX片段"))
+      ;; 如果不包含 UTF-8 字符，就使用 dvipng、dvisvgm、imagemagick 引擎
+      (setq org-preview-latex-default-process 'dvipng)
+      (message "目前使用了org-mode默认的dvipng、dvisvgm、imagemagick引擎渲染此LaTeX片段"))
+    (org-latex-preview)
+    ;; 每次执行完毕后都恢复为 dvipng、dvisvgm、imagemagick 引擎
+    (setq org-preview-latex-default-process 'dvipng)
+    (message "Creating Latex previews in section...(and recover dvipng...) done.")))
+
+  (defun kivnn/org-latex-preview ()
+    "无视fontspec包的定死字体大小的限制，强制渲染指定字体大小的LaTeX片段(才发现这个函数含金量这么足)"
+    (interactive)
+    (kivnn/org-latex-preview-format)
+    (kivnn/org-latex-preview-engine))
+
+  (define-key org-mode-map (kbd "C-1919810")             'kivnn/org-latex-preview)                          ; 无视fontspec包的定死字体大小的限制，强制渲染指定字体大小的LaTeX片段  
+#+end_src
