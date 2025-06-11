@@ -1,18 +1,8 @@
-* 🔨 Working in Proress(文档施工中ing.....)
+* 🔨 .emacs.d
 
 ** 💡 MEME
 
-[[./MEME/EmacsTheTrueEditor.png]]
-
-** 📰 一些负责任的话
-
-请真的不要滥抄我个人的配置，很负责任地说这并不是说劝退什么的
-
-更加重要的原因，只是因为符合个人习惯的不一定会适合您的习惯
-
-还是推荐您先观看一下 [[https://www.bilibili.com/video/BV1Fb421v7ZV][daily tsoding - one thing every programmer must have]] 这个视频
-
-*仅供参考*
+[[https://github.com/kitevnn/dotfiles-archlinux/blob/main/MEME/EmacsTheTrueEditor.png][EmacsTheTrueEditor]]
 
 ** 🎑 GNU Emacs快捷键风格
 
