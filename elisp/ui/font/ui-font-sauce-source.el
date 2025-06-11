@@ -38,9 +38,9 @@
 (defun kivnn/set-source-source-sauce ()
   "设置source-source-source字体"
   (setq-local face-remapping-alist
-              `((default            :family ,variable-ui-fonts-source  :height ,(+ variable-ui-fonts-size 20))
-                (variable-pitch nil :family ,variable-ui-fonts-source  :height ,(+ variable-ui-fonts-size 20))
-                (fixed-pitch nil    :family ,variable-ui-fonts-sauce   :height ,(+ variable-ui-fonts-size 20)))))
+              `((default            :family ,variable-ui-fonts-source  :height ,variable-ui-fonts-size)
+                (variable-pitch nil :family ,variable-ui-fonts-source  :height ,variable-ui-fonts-size)
+                (fixed-pitch nil    :family ,variable-ui-fonts-sauce   :height ,variable-ui-fonts-size))))
 
 (defun kivnn/set-sauce-small ()
   "设置sauce字体(small)"
