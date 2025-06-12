@@ -117,25 +117,6 @@ Accompanying With GNU Emacs: 202 hours, 59 minutes, 49 seconds
   (add-hook 'kill-emacs-hook 'my-save-emacs-uptime)                            ; 在退出Emacs时保存当前uptime  
 #+end_src
 
-*我自己的改进思路*
-
-当前必须退出后1个Emacs进程后，才能统计本次的累计使用总时长，这是因为保存了的是逐渐递增的emacs-uptime，而非增量
-
-+ 保存的是增量emacs-uptime-DELTA，而不是逐渐递增的emacs-uptime
-
-  #+begin_quote
-  抽象一个根据 ~(emacs-uptime)~ 的变量，作为增量时间 ~(defvar emacs-uptime-delta "")~
-
-  使得每次执行函数 ~my-save-emacs-uptime~ 后
-
-  能模仿emacs-uptime的字符串(如Uptime: 1 hours, 55 minutes, 33 seconds)
-
-  保存到指定的文件中
-
-  (以后有空再弄.....因为这几天我自己已经配置了接近20小时的GNU Emacs了......下次再弄下次再弄)
-  #+end_quote
-
-  
 *** 2. 在modeline上展示 [议程数量] 的信息
 
 *可能哪里会出现一点点错误，但大致上的逻辑就是这样*
@@ -243,36 +224,218 @@ Accompanying With GNU Emacs: 202 hours, 59 minutes, 49 seconds
   (global-set-key (kbd "C-114514")                   'kivnn/view-echo-area-messages)
 #+end_src
 
-*** 4. 含金量非常足的在org-mode里渲染含中文的LaTeX片段
+*** 4. 魔改org-latex-preview默认的dvipng命令，并在此基础上添加xelatex-chinese处理引擎
 
-*相当于对LaTeX的渲染程序进行了排列组合: 无视fontspec包的定死字体大小的限制，强制渲染指定字体大小9pt的LaTeX片段*
+**** (1) dvipng方案(dvi → png，130 DPI，字体思源雅黑CN(adobe-source-han-sans-cn-fonts))
 
-缺点
-- 方案是pdf转png，相比于svg来说可能较吃性能，但png兼容性更好
+#+begin_src sh
+# C-h v dvipng-image-size-adjust
+# (1.7 . 1.5)
+
+# C-h v dvipng-latex-compiler
+latex -interaction nonstopmode -output-directory %o %f
+
+# C-h v dvipng-image-converter-dpi
+# 130
+
+# C-h v dvipng-image-converter
+dvipng -D 130 -T tight -o %O %f
+
+# C-h v dvipng-transparent-image-converter
+convert -density 130 -background '#FFFFFF' -flatten -quality 100 %f %O  
+#+end_src
+
+**** (2) xelatex-chinese方案(pdf → png，不能异步渲染，字体思源雅黑CN(adobe-source-han-sans-cn-fonts))
+
+#+begin_src sh
+# C-h v xelatex-chinese-latex-header
+# "\\documentclass[11pt]{standalone}
+#                               \\usepackage{fontspec}
+#                               \\setmainfont{Source Han Sans CN}
+#                               \\setsansfont{Source Han Sans CN}
+#                               \\setmonofont{Source Han Sans CN}
+#                               \\usepackage[usenames]{color}
+#                               \\usepackage{amsmath}
+#                               \\usepackage{extpfeil}
+#                               \\pagestyle{empty}"
+
+# C-h v xelatex-chinese-image-size-adjust
+# (1.7 . 1.5)  
   
-- \( 需手动将光标放在此上下文范围内，然后执行函数才能渲染 \)
+# C-h v xelatex-chinese-latex-compiler
+xelatex -interaction nonstopmode -output-directory %o %f
+  
+# C-h v xelatex-chinese-image-converter
+convert -density 105 -background '#FFFFFF' -flatten -quality 100 %f %O  
+#+end_src
+
+**** (3) 配置方法
 
 #+begin_src elisp
-  (add-to-list 'org-preview-latex-process-alist
-               '(xelatex-chinese
-                 :programs ("xelatex" "convert")
-                 :description "pdf > png"
-                 :message "you need to install the programs: xelatex and dvipng."
-                 :image-input-type "pdf"
-                 :image-output-type "png"
-                 :image-size-adjust (1.7 . 1.5)
-                 :latex-header "\\documentclass[11pt]{standalone}
-                                \\usepackage{fontspec}
-                                \\setmainfont{Source Han Sans CN}
-                                \\setsansfont{Source Han Sans CN}
-                                \\setmonofont{Source Han Sans CN}
-                                \\usepackage[usenames]{color}
-                                \\usepackage{amsmath}
-                                \\usepackage{extpfeil}
-                                \\pagestyle{empty}"
-                 :latex-compiler ("xelatex -interaction nonstopmode -output-directory %o %f")
-                 :image-converter ("convert -density 90 -background '#FFFFFF' -flatten -quality 100 %f %O")))
+;; =========================================================================================================  
+;;   
+;; 自定义dvipng引擎
+;;     
+;; =========================================================================================================
+;; 设置dvipng的调整图片大小
+(defvar dvipng-image-size-adjust
+  (read (format "(%f . %f)"
+                variable-latex-fragment-adjust-width
+                variable-latex-fragment-adjust-height)))
 
+;; 设置latex编译器的生成dvi文件的行为
+(defvar dvipng-latex-compiler
+  (concat "latex"                         ; 使用latex编译器来生成.dvi文件
+          " "
+          "-interaction nonstopmode"      ; 编译时遇到错误也不停下，继续编译，防止Emacs因为一些上古LaTeX2e宏包的错误而卡住
+          " "
+          "-output-directory %o"          ; 在当前目录的临时目录下，输出编译出来的产物文件
+          " "
+          "%f"                            ; Emacs临时根据当前latex-fragment生成.tex源文件，并传入到前面的编译器来编译
+          ))
+
+;; 设置dvipng转换图片程序的从dvi生成到png的行为
+(defvar dvipng-image-converter-dpi variable-ui-fonts-size)
+(defvar dvipng-image-converter
+  (concat
+   "dvipng"                               ; 将之前得到的dvi文件，转换为png的引擎程序
+   " "
+   (format "-D %d"
+           dvipng-image-converter-dpi)    ; 设置分辨率
+   " "
+   "-T tight"                             ; 自动裁剪边缘空白，防止出现大面积空白区域
+   " "
+   "-o %O"                                ; 在当前目录的临时目录下，输出编译出来的产物文件
+   " "
+   "%f"                                   ; 输入读取.dvi文件，来在下一步去转换为png文件
+   ))
+
+;; 设置imagemagick转换图片程序从png到更进一步的png的行为
+(defvar dvipng-transparent-image-converter
+  (concat
+   "convert"                              ; convert也就是imagemagick
+   " "
+   (format "-density %d"                  ; 控制像素密度
+         variable-ui-fonts-size)
+   " "
+   (format "-background '%s'"             ; 设置背景颜色
+           variable-latex-fragment-background)
+   " "
+   "-flatten"                             ; 类似PS的合并图层，需要在-background后面使用，目的是将透明区域变成带RGB通道的区域
+   " "
+   (format "-quality %d"                  ; PNG 的压缩质量(对于 PNG 影响不大，对 JPEG 很重要)
+           variable-latex-fragment-quality)
+   " "
+   "%f"                                   ; 输入读取.png文件，来载下一步去转换为magick这里设置出来的png文件
+   " "
+   "%O"                                   ; 输出magick这里设置出来的png文件的文件名占位符
+   ))
+
+
+;; ========================================
+;; dvipng: 渲染非utf-8片段引擎
+;; ========================================
+;; 删除原本的
+(setq org-preview-latex-process-alist
+      (assq-delete-all 'dvipng org-preview-latex-process-alist))
+;; 添加自己的
+(setq org-preview-latex-process-alist
+      `((dvipng
+        :programs ("latex" "dvipng" "convert")
+        :description "dvi > png"
+        :message "you need to install the programs: latex and dvipng."
+        :image-input-type "dvi"
+        :image-output-type "png"
+        :image-size-adjust ,dvipng-image-size-adjust
+        :latex-compiler (,dvipng-latex-compiler)
+        :image-converter (,dvipng-image-converter)
+        :transparent-image-converter (,dvipng-transparent-image-converter))))
+
+
+  
+;; =========================================================================================================  
+;;   
+;; 自定义xelatex-chinese引擎
+;;     
+;; =========================================================================================================  
+;; 设置dvipng的调整图片大小
+(defvar xelatex-chinese-image-size-adjust
+  (read (format "(%f . %f)"
+                variable-latex-fragment-adjust-width
+                variable-latex-fragment-adjust-height)))
+
+;; 设置xelatex-chinese的latex头文件
+(defvar xelatex-chinese-latex-header
+  (format "\\documentclass[%s]{standalone}
+                              \\usepackage{fontspec}
+                              \\setmainfont{%s}
+                              \\setsansfont{%s}
+                              \\setmonofont{%s}
+                              \\usepackage[usenames]{color}
+                              \\usepackage{amsmath}
+                              \\usepackage{extpfeil}
+                              \\pagestyle{empty}"
+          variable-latex-fragment-documentclass-base
+          variable-ui-fonts-source
+          variable-ui-fonts-source
+          variable-ui-fonts-source))
+
+;; 设置xelatex编译器的从pdf生成到png的行为
+(defvar xelatex-chinese-latex-compiler
+  (concat
+   "xelatex"                                    ; 使用xelatex编译器来生成.pdf文件
+   " "
+   "-interaction nonstopmode"                   ; 编译时遇到错误也不停下，继续编译，防止Emacs因为一些上古LaTeX2e宏包的错误而卡住
+   " "
+   "-output-directory %o"                       ; 在当前目录的临时目录下，输出编译出来的产物文件
+   " "
+   "%f"                                         ; Emacs临时根据当前latex-fragment生成.tex源文件，并传入到前面的编译器来编译
+   ))
+
+;; 设置imagemagick转换图片程序从png到更进一步的png的行为
+(defvar xelatex-chinese-image-converter
+  (concat
+   "convert"                                    ; convert也就是imagemagick
+   " "
+   (format "-density %d"
+           (- variable-ui-fonts-size 25))       ; 控制像素密度
+   " "
+   (format "-background '%s'"
+           variable-latex-fragment-background)  ; 设置背景颜色
+   " "
+   "-flatten"                                   ; 类似PS的合并图层，需要在-background后面使用，目的是将透明区域变成带RGB通道的区域
+   " "
+   (format "-quality %d"
+           variable-latex-fragment-quality)     ; PNG 的压缩质量(对于 PNG 影响不大，对 JPEG 很重要)
+   " "
+   "%f"                                        ; 输入读取.png文件，来载下一步去转换为magick这里设置出来的png文件
+   " "
+   "%O"                                        ; 输出magick这里设置出来的png文件的文件名占位符
+   ))
+
+
+;; ========================================
+;; xelatex-chinese: 渲染utf-8片段引擎
+;; ========================================
+(add-to-list 'org-preview-latex-process-alist
+             `(xelatex-chinese
+               :programs ("xelatex" "convert")
+               :description "pdf > png"
+               :message "you need to install the programs: xelatex and dvipng."
+               :image-input-type "pdf"
+               :image-output-type "png"
+               :image-size-adjust ,xelatex-chinese-image-size-adjust
+               :latex-header ,xelatex-chinese-latex-header
+               :latex-compiler (,xelatex-chinese-latex-compiler)
+               :image-converter (,xelatex-chinese-image-converter)))
+
+
+  
+;; =========================================================================================================
+;;   
+;; 手动选择 org-preview-latex-default-process 来自由地切换在 dvipng(默认) 与 xelatex-chinese(自定义) 处理引擎
+;;     
+;; =========================================================================================================
   (defvar variable-latex-fragment-left-bound  "\\\("                                          "[变量]: latex-fragment的左边界")
   (defvar variable-latex-fragment-right-bound "\\\)"                                          "[变量]: latex-fragment的右边界")
 

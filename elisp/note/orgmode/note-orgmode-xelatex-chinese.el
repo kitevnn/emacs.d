@@ -4,8 +4,8 @@
 ;; 设置dvipng的调整图片大小
 (defvar xelatex-chinese-image-size-adjust
   (read (format "(%f . %f)"
-                variable-latex-fragment-adjust-width 0.3
-                variable-latex-fragment-adjust-height 0.3)))
+                variable-latex-fragment-adjust-width
+                variable-latex-fragment-adjust-height)))
 
 ;; 设置xelatex-chinese的latex头文件
 (defvar xelatex-chinese-latex-header
