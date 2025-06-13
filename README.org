@@ -14,7 +14,7 @@
 |    4 | ~C-z C-t~             | *<t>* heme                    |
 |    5 | ~C-z C-b~             | *<b>* uffer                   |
 |    6 | ~C-z C-w~             | resize *<w>* indow            |
-|    7 | ~C-z C-d~             | *<d>* ashboard & *<d> irvish* |
+|    7 | ~C-z C-d~             | *<d>* ashboard & *<d>* irvish |
 |    8 | ~C-z C-x~             | te *<x>* t                    |
 |    9 | ~C-z C-n~             | de *<n>* ote                  |
 |   10 | ~C-z C-a~             | *<a>* genda                   |
