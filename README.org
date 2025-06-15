@@ -271,6 +271,17 @@ convert -density 105 -background '#FFFFFF' -flatten -quality 100 %f %O
 
 **** (3) 配置方法
 
+坑点说明
+
+#+begin_quote
+  如果想通过 [某变量] 来整体控制LaTeX图片的背景颜色的话
+  那么 dvipng 就不能加上 -bg Transparent 或 -bg White 的参数
+  因为 dvipng 的此颜色参数，会覆盖后面的 imagemagick 的颜色转换
+  导致将来在Emacs里预览时，颜色一直都将会是 Transparent 或 White 等颜色  
+#+end_quote
+
+配置方法
+
 #+begin_src elisp
 ;; =========================================================================================================  
 ;;   
