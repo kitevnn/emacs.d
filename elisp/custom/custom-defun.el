@@ -228,9 +228,6 @@
   (dolist (face-attr '((child-frame-border                      :background "#37474f")
                        (internal-border                         :background "#37474f")))
     (apply #'set-face-attribute (car face-attr) nil (cdr face-attr)))
-  ;; 亮色minibuffer-prompt
-  (dolist (face-attr `((minibuffer-prompt                                :family ,variable-ui-fonts-sauce   :height ,variable-ui-fonts-size)))
-    (apply #'set-face-attribute (car face-attr) nil (cdr face-attr)))
   ;; 亮色corfu
   (with-eval-after-load 'corfu
     (dolist (face-attr '((corfu-default                         :background "#ffffff")
@@ -358,9 +355,6 @@
   ;; 暗色child-frame-border
   (dolist (face-attr '((child-frame-border                      :background "#3bb1df")
                        (internal-border                         :background "#3bb1df")))
-    (apply #'set-face-attribute (car face-attr) nil (cdr face-attr)))
-  ;; 暗色minibuffer-prompt
-  (dolist (face-attr `((minibuffer-prompt                                :family ,variable-ui-fonts-sauce   :height ,variable-ui-fonts-size)))
     (apply #'set-face-attribute (car face-attr) nil (cdr face-attr)))
   ;; 暗色corfu
   (with-eval-after-load 'corfu
@@ -750,6 +744,19 @@
   (interactive)
   (kivnn/org-latex-preview-format)
   (kivnn/org-latex-preview-engine))
+
+
+;; =======================================
+;; 给字体使用的偏移值，进行更软的编码
+;; =======================================
+(defun kivnn/apply-font-offset (base-size offset-str)
+  "给默认字体使用的偏移值，进行更软的编码"
+  (let* ((sign (substring offset-str 0 1))
+         (magnitude (string-to-number (substring offset-str 1))))
+    (cond
+     ((string= sign "+") (+ base-size magnitude))
+     ((string= sign "-") (- base-size magnitude))
+     (t base-size))))
 
 
 ;; =======================================

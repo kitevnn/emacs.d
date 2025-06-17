@@ -25,6 +25,7 @@
 ;; 关于variable变量
 ;; =======================================
 (defvar variable-ui-fonts-size                       130                                            "[变量]: 默认的字体大小")
+(defvar variable-ui-fonts-size-offset-minibuffer     "-25"                                          "[变量]: minibuffer的字体大小的偏差值")
 (defvar variable-ui-fonts-sauce                      "SauceCodeProNerdFontCompleteMono Nerd Font"   "[变量]: 字体nf-sauce")
 (defvar variable-ui-fonts-source                     "Source Han Sans CN"                           "[变量]: 字体source-han-sans-CN")
 (defvar variable-latex-fragment-left-bound           "\\\("                                         "[变量]: latex-fragment的左边界")

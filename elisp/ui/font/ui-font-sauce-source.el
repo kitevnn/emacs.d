@@ -7,7 +7,7 @@
 ;; 全局字体设置
 ;; ========================================
 (set-face-attribute 'default nil
-                    :height variable-ui-fonts-size
+                    :height (kivnn/apply-font-offset variable-ui-fonts-size variable-ui-fonts-size-offset-minibuffer)
                     :font variable-ui-fonts-sauce)
 (set-face-attribute 'mode-line nil
                     :height (- variable-ui-fonts-size 30)
@@ -66,8 +66,6 @@
 (add-hook 'dired-mode-hook         #'kivnn/set-sauce-small)
 (add-hook 'html-mode-hook          #'kivnn/set-sauce-small)
 (add-hook 'text-mode-hook          #'kivnn/set-sauce-small)
-(add-hook 'minibuffer-mode-hook    #'kivnn/set-sauce-small)
 
 
 (provide 'ui-font-sauce-source)
-
