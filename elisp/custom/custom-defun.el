@@ -75,7 +75,7 @@
       (setq buffer-undo-list (cons (cons eol (point)) buffer-undo-list))))
   (next-line arg))
 
-;; 编辑增强(C-y 与 C-u C-y, from chatGPT 4o(未降智版))
+;; 编辑增强(C-y 与 C-u C-y,)
 (defun kivnn/yank-or-copy-line (arg)
   "保证光标与C-y不变下，C-u C-y复制当前行，就像vim的yy一样"
   (interactive "P")
@@ -103,7 +103,6 @@
 
 ;; =======================================
 ;; 在org-mode下避免valign-mode造成的卡顿问题
-;; from chatGPT 4o(未降智版)
 ;; =======================================
 (defun kivnn/toggle-inline-images-with-valign ()
   (interactive)
@@ -117,7 +116,6 @@
 
 ;; =======================================
 ;; 重量级更新: 解耦org-cycle与cdlatex-tab的快捷键
-;; from chatGPT 4o(未降智版)
 ;; =======================================
 (defun kivnn/org-table-with-cdlatex ()
   (when (and (derived-mode-p 'org-mode) (not (minibufferp)))
@@ -406,7 +404,6 @@
 
 ;; =======================================
 ;; 在org-mode的公式上下文的光标跳转
-;; from chatGPT 4o(未降智版)
 ;; =======================================
 (defun kivnn/jump-the-beginning-of-the-latex-fragment (arg)
   "根据 prefix(C-u) 参数决定是否手动或自动进入选区模式，并跳转到公式片段的左边界"
@@ -529,7 +526,6 @@
 
 ;; =======================================
 ;; 关于模拟vim的f(find char)
-;; from GPT 4o(未降智版)
 ;; =======================================
 (defun kivnn/expand-region-like-vim-find-char ()
   "在选区模式下，不改变左边界，只改变选区右边界，来扩展选区"
@@ -546,7 +542,6 @@
 
 ;; =======================================
 ;; 关于telega字体大小
-;; from GPT 4o(未降智版)
 ;; =======================================
 (defun kivnn/telega-buffer-face-height ()
   "调整telega的字体大小为1.3倍"
@@ -567,7 +562,6 @@
 
 ;; =======================================
 ;; 关于个人提交信息模板
-;; from GPT 4o(未降智版)
 ;; =======================================
 (defun kivnn/magit-commit-template-archlinux ()
   "个人提交信息模板: 第1次询问标题，第2次询问子项数量，在ArchLinux环境"
@@ -598,7 +592,6 @@
 
 ;; =======================================
 ;; 关于括号匹配parentheses
-;; from GPT 4o(未降智版)
 ;; =======================================
 (defun kivnn/goto-match-paren (arg)
   "括号匹配parentheses"
@@ -637,7 +630,6 @@
 
 ;; =======================================
 ;; 关于face
-;; from GPT 4o(未降智版)
 ;; =======================================
 (defun kivnn/describe-faces-at-point ()
   "显示光标所在行的所有face名称及属性"
@@ -655,7 +647,6 @@
 
 ;; =======================================
 ;; 关于org-download
-;; from GPT 4o(未降智版)
 ;; =======================================
 (defun kivnn/set-org-download-dir ()
   "将org-download剪贴板图片保存在当前org所在目录的png/下"
@@ -699,7 +690,6 @@
 
 ;; =======================================
 ;; 动态选择引擎来渲染
-;; from GPT 4o(未降智版)
 ;; =======================================
 (defun kivnn/org-latex-preview-format ()
   "渲染中文LaTeX片段之前的格式化"
@@ -761,7 +751,6 @@
 
 ;; =======================================
 ;; 关于状态仪表盘
-;; from GPT 4o(未降智版)
 ;; =======================================
 (defvar modeline-modes "")
 (defun kivnn/update-modeline-modes ()
@@ -805,7 +794,6 @@
 
 ;; =======================================
 ;; [WSL环境]: 优化emacs-rime的使用体验
-;; from chatGPT 4o(未降智版)
 ;; =======================================
 (defun kivnn/isearch-forward ()
   "打开并编辑前向搜索C-s"
