@@ -205,13 +205,13 @@
     (apply #'set-face-attribute (car face-attr) nil (cdr face-attr)))
   ;; 亮色emacs-rime
   (dolist (face-attr
-           `((rime-candidate-num-face                                                 :foreground "#90a4ae" :height ,variable-ui-fonts-size)
-             (rime-code-face                                    :background "#37474f" :foreground "#ffffff" :height ,variable-ui-fonts-size)
-             (rime-comment-face                                                       :foreground "#374f4f" :height ,variable-ui-fonts-size)
-             (rime-cursor-face                                  :background "#37474f" :foreground "#ffffff" :height ,variable-ui-fonts-size)
-             (rime-default-face                                 :background "#eceff1" :foreground "#37474f" :height ,variable-ui-fonts-size)
-             (rime-highlight-candidate-face                                           :foreground "#673ab7" :height ,variable-ui-fonts-size)
-             (rime-indicator-dim-face                                                 :foreground "#37474f" :height ,variable-ui-fonts-size)
+           `((rime-candidate-num-face                                                 :foreground "#90a4ae" :height ,(- variable-ui-fonts-size 30))
+             (rime-code-face                                    :background "#37474f" :foreground "#ffffff" :height ,(- variable-ui-fonts-size 30))
+             (rime-comment-face                                                       :foreground "#374f4f" :height ,(- variable-ui-fonts-size 30))
+             (rime-cursor-face                                  :background "#37474f" :foreground "#ffffff" :height ,(- variable-ui-fonts-size 30))
+             (rime-default-face                                 :background "#eceff1" :foreground "#37474f" :height ,(- variable-ui-fonts-size 30))
+             (rime-highlight-candidate-face                                           :foreground "#673ab7" :height ,(- variable-ui-fonts-size 30))
+             (rime-indicator-dim-face                                                 :foreground "#37474f" :height ,(- variable-ui-fonts-size 30))
              (rime-preedit-face                                 :background "#90a4ae" :foreground "#ffffff" :height ,(- variable-ui-fonts-size 20))))
     (apply #'set-face-attribute (car face-attr) nil (cdr face-attr)))
   ;; 亮色trailing-whitespace
@@ -333,13 +333,13 @@
     (apply #'set-face-attribute (car face-attr) nil (cdr face-attr)))
   ;; 暗色emacs-rime
   (dolist (face-attr
-           `((rime-candidate-num-face                                                 :foreground "#c5c8c6" :height ,variable-ui-fonts-size)
-             (rime-code-face                                    :background "#444444" :foreground "#64fbc8" :height ,variable-ui-fonts-size)
-             (rime-comment-face                                                       :foreground "#c5c8c6" :height ,variable-ui-fonts-size)
-             (rime-cursor-face                                                        :foreground "#b5ffd1" :height ,variable-ui-fonts-size)
-             (rime-default-face                                 :background "#191919" :foreground "#64fbc8" :height ,variable-ui-fonts-size)
-             (rime-highlight-candidate-face                                           :foreground "#ffc300" :height ,variable-ui-fonts-size)
-             (rime-indicator-dim-face                                                 :foreground "#c5c8c6" :height ,variable-ui-fonts-size)
+           `((rime-candidate-num-face                                                 :foreground "#c5c8c6" :height ,(- variable-ui-fonts-size 30))
+             (rime-code-face                                    :background "#444444" :foreground "#64fbc8" :height ,(- variable-ui-fonts-size 30))
+             (rime-comment-face                                                       :foreground "#c5c8c6" :height ,(- variable-ui-fonts-size 30))
+             (rime-cursor-face                                                        :foreground "#b5ffd1" :height ,(- variable-ui-fonts-size 30))
+             (rime-default-face                                 :background "#191919" :foreground "#64fbc8" :height ,(- variable-ui-fonts-size 30))
+             (rime-highlight-candidate-face                                           :foreground "#ffc300" :height ,(- variable-ui-fonts-size 30))
+             (rime-indicator-dim-face                                                 :foreground "#c5c8c6" :height ,(- variable-ui-fonts-size 30))
              (rime-preedit-face                                 :background "#444444" :foreground "#64fbc8" :height ,(- variable-ui-fonts-size 20))))
     (apply #'set-face-attribute (car face-attr) nil (cdr face-attr)))
   ;; 暗色trailing-whitespace
