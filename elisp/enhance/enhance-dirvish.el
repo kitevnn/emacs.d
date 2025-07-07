@@ -13,5 +13,11 @@
         delete-by-moving-to-trash t
         dired-listing-switches "-l --almost-all --human-readable --group-directories-first --no-group"))
 
+;; 解决dirvish的C-n下跳两行的问题(from DeepSeek V3)
+(with-eval-after-load 'dirvish
+  (advice-add 'dired-next-line :override
+              (lambda (&optional arg)
+                (next-line (or arg 1)))))
+
 
 (provide 'enhance-dirvish)

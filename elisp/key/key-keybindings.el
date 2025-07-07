@@ -101,7 +101,6 @@
 (global-set-key (kbd "C-z C-z C-d")                      'dirvish-side)                                    ; 左侧打开dirvish
 (global-set-key (kbd "C-z C-d C-d")                      'dirvish-side)                                    ; 左侧打开dirvish(尝试)
 (global-set-key (kbd "C-z C-z C-0")                      'dirvish)                                         ; 全局打开dirvish
-(define-key dired-mode-map (kbd "C-z C-z C-u")           'dired-undo)                                      ; 在dirvish里撤回上次操作
 (define-key dired-mode-map "."                           'dired-create-empty-file)                         ; 在dirvish里创建空文件
 (define-key dired-mode-map ","                           'dired-clean-directory)                           ; 在dirvish里创建新目录
 
