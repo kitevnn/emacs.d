@@ -1,0 +1,867 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2025-07-20 Sun 16:48 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="author" content="kle" />
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+</head>
+<body>
+<div id="content" class="content">
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org93a5a6b">1. 🔨 .emacs.d</a>
+<ul>
+<li><a href="#org4a633fd">1.1. 💡 Startup</a></li>
+<li><a href="#org8323b52">1.2. 🎑 GNU Emacs快捷键风格</a></li>
+<li><a href="#org52a3f26">1.3. 🔔 MEME</a></li>
+<li><a href="#orgacded97">1.4. 🔑 有趣的实现</a>
+<ul>
+<li><a href="#org505f74c">1.4.1. 1. GNU Emacs总使用时长</a></li>
+<li><a href="#orgda0594f">1.4.2. 2. 在modeline上展示 [议程数量] 的信息</a></li>
+<li><a href="#org8d9ec70">1.4.3. 3. 去除首次打开的 <code>*Message*</code> 与 <code>*scratch*</code></a></li>
+<li><a href="#orgad115a3">1.4.4. 4. 魔改org-latex-preview默认的dvipng命令，并在此基础上添加xelatex-chinese处理引擎</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org93a5a6b" class="outline-2">
+<h2 id="org93a5a6b"><span class="section-number-2">1.</span> 🔨 .emacs.d</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-org4a633fd" class="outline-3">
+<h3 id="org4a633fd"><span class="section-number-3">1.1.</span> 💡 Startup</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+<a href="./archive/Startup1.png">Startup1</a>
+</p>
+
+<p>
+<a href="archive/Startup2.png">Startup2</a>
+</p>
+</div>
+</div>
+<div id="outline-container-org8323b52" class="outline-3">
+<h3 id="org8323b52"><span class="section-number-3">1.2.</span> 🎑 GNU Emacs快捷键风格</h3>
+<div class="outline-text-3" id="text-1-2">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">序号</th>
+<th scope="col" class="org-left">快捷键前缀(prefix-key)</th>
+<th scope="col" class="org-left">解释意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">1</td>
+<td class="org-left"><code>C-z C-z</code></td>
+<td class="org-left"><b>&lt;custom&gt;</b></td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-left"><code>C-z C-p</code></td>
+<td class="org-left"><b>&lt;p&gt;</b> rocess</td>
+</tr>
+
+<tr>
+<td class="org-right">3</td>
+<td class="org-left"><code>C-z C-s</code></td>
+<td class="org-left"><b>&lt;s&gt;</b> witch window</td>
+</tr>
+
+<tr>
+<td class="org-right">4</td>
+<td class="org-left"><code>C-z C-t</code></td>
+<td class="org-left"><b>&lt;t&gt;</b> heme</td>
+</tr>
+
+<tr>
+<td class="org-right">5</td>
+<td class="org-left"><code>C-z C-b</code></td>
+<td class="org-left"><b>&lt;b&gt;</b> uffer</td>
+</tr>
+
+<tr>
+<td class="org-right">6</td>
+<td class="org-left"><code>C-z C-w</code></td>
+<td class="org-left">resize <b>&lt;w&gt;</b> indow</td>
+</tr>
+
+<tr>
+<td class="org-right">7</td>
+<td class="org-left"><code>C-z C-d</code></td>
+<td class="org-left"><b>&lt;d&gt;</b> ashboard &amp; <b>&lt;d&gt;</b> irvish</td>
+</tr>
+
+<tr>
+<td class="org-right">8</td>
+<td class="org-left"><code>C-z C-x</code></td>
+<td class="org-left">te <b>&lt;x&gt;</b> t</td>
+</tr>
+
+<tr>
+<td class="org-right">9</td>
+<td class="org-left"><code>C-z C-n</code></td>
+<td class="org-left">de <b>&lt;n&gt;</b> ote</td>
+</tr>
+
+<tr>
+<td class="org-right">10</td>
+<td class="org-left"><code>C-z C-a</code></td>
+<td class="org-left"><b>&lt;a&gt;</b> genda</td>
+</tr>
+
+<tr>
+<td class="org-right">11</td>
+<td class="org-left"><code>C-z C-o</code></td>
+<td class="org-left"><b>&lt;o&gt;</b> rg-mode</td>
+</tr>
+
+<tr>
+<td class="org-right">12</td>
+<td class="org-left"><code>C-z C-m</code></td>
+<td class="org-left">e <b>&lt;m&gt;</b> ms</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org52a3f26" class="outline-3">
+<h3 id="org52a3f26"><span class="section-number-3">1.3.</span> 🔔 MEME</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+<a href="https://github.com/kitevnn/dotfiles-archlinux/blob/main/MEME/EmacsTheTrueEditor.png">EmacsTheTrueEditor</a>
+</p>
+</div>
+</div>
+<div id="outline-container-orgacded97" class="outline-3">
+<h3 id="orgacded97"><span class="section-number-3">1.4.</span> 🔑 有趣的实现</h3>
+<div class="outline-text-3" id="text-1-4">
+</div>
+<div id="outline-container-org505f74c" class="outline-4">
+<h4 id="org505f74c"><span class="section-number-4">1.4.1.</span> 1. GNU Emacs总使用时长</h4>
+<div class="outline-text-4" id="text-1-4-1">
+<p>
+从 <code>2025年 01月 26日 星期日 13:55:28 CST</code> 重新开始累计
+</p>
+
+<blockquote>
+<p>
+Accompanying With GNU Emacs: 202 hours, 59 minutes, 49 seconds
+</p>
+</blockquote>
+
+<p>
+实现过程(展示代码，从而来证明我自己并没有乱写时间上去，因为每次的时间都依赖于 <code>(emacs-uptime)</code> 此el函数来获取)
+</p>
+
+<p>
+<b>bash方面</b>
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">#!/bin/bash
+
+# 基本路径配置
+user="une"
+path1=".config/emacs/archive"
+path2=".config/emacs/elisp/site-lisp/sh"
+filename="uptime"
+
+# 存储文件路径
+file1="/home/${user}/${path1}/${filename}"
+file2="/home/${user}/${path2}/${filename}"
+
+# 初始化总时间
+total_seconds=0
+
+# 逐行读取文件内容
+while IFS= read -r line; do
+  # 匹配并提取小时、分钟和秒
+  if [[ "$line" =~ Uptime:\ ([0-9]+)\ hours?,\ ([0-9]+)\ minutes?,\ ([0-9]+)\ seconds? ]]; then
+    hours=${BASH_REMATCH[1]}
+    minutes=${BASH_REMATCH[2]}
+    seconds=${BASH_REMATCH[3]}
+  elif [[ "$line" =~ Uptime:\ ([0-9]+)\ minutes?,\ ([0-9]+)\ seconds? ]]; then
+    hours=0
+    minutes=${BASH_REMATCH[1]}
+    seconds=${BASH_REMATCH[2]}
+  elif [[ "$line" =~ Uptime:\ ([0-9]+)\ seconds? ]]; then
+    hours=0
+    minutes=0
+    seconds=${BASH_REMATCH[1]}
+  else
+    # 如果不匹配任何已知格式，跳过这行
+    continue
+  fi
+
+  # 将时间转换为秒
+  total_seconds=$((total_seconds + hours * 3600 + minutes * 60 + seconds))
+
+done &lt; "$file1"
+
+# 可选：将秒数转换为小时:分钟:秒 格式
+total_hours=$((total_seconds / 3600))
+remaining_minutes=$(((total_seconds % 3600) / 60))
+remaining_seconds=$((total_seconds % 60))
+
+# 输出总时间
+echo "Accompanying With GNU Emacs: $total_hours hours, $remaining_minutes minutes, $remaining_seconds seconds"
+echo "Accompanying With GNU Emacs: $total_hours hours, $remaining_minutes minutes, $remaining_seconds seconds" &gt; "$file2"
+</pre>
+</div>
+
+<p>
+<b>elisp方面</b>
+</p>
+<div class="org-src-container">
+<pre class="src src-elisp">;; =======================================
+;; 路径变量 (~/.config/emacs/elisp/basic/basic-file.el)
+;; =======================================
+(defvar directory-site-lisp               "elisp/site-lisp/sh/")                     ; emacs配置文件路径的modeline部分
+
+;; =======================================
+;; 手动更新已使用的GNU Emacs累加时长 (~/.config/emacs/elisp/custom/custom-defun.el)
+;; =======================================
+(defun my-save-emacs-uptime ()
+  "通过设置钩子hooks，在每次退出Emacs后，自动保存emacs-uptime数据到指定文件内"
+  (let ((uptime (emacs-uptime)))
+    (with-temp-buffer
+      (insert (format "Uptime: %s\n" uptime))
+      (append-to-file (point-min) (point-max)  (concat user-emacs-directory directory-emacs-archive "uptime")))))
+
+(defun my-show-emacs-uptime ()
+  "通过site-lisp的sh脚本实现，获取Emacs的累计使用总时长"
+  (interactive)
+  (let ((uptime-output
+         (string-trim (shell-command-to-string
+                       (concat user-emacs-directory directory-site-lisp "calculate-uptime.sh")))))
+    (insert uptime-output)))
+
+
+;; =======================================
+;; 更新 calculate-uptime.sh 脚本输出的钩子 (~/.config/emacs/elisp/hooks/hooks-hook.el)
+;; =======================================
+(add-hook 'kill-emacs-hook 'my-save-emacs-uptime)                            ; 在退出Emacs时保存当前uptime
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgda0594f" class="outline-4">
+<h4 id="orgda0594f"><span class="section-number-4">1.4.2.</span> 2. 在modeline上展示 [议程数量] 的信息</h4>
+<div class="outline-text-4" id="text-1-4-2">
+<p>
+<b>可能哪里会出现一点点错误，但大致上的逻辑就是这样</b>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-elisp">;; ==============================================
+;; 设置org-mode必要的关键词
+;; ==============================================
+(setq org-todo-keywords
+      '((sequence "TODO" "DOING" "WAIT" "DONE" "MY")))
+
+  ;; ==============================================
+  ;; 生产数据的过程
+  ;; ==============================================
+  ;; 必要的变量信息
+  (defvar file-org-agenda-files               "/home/user/directory-114514/1919810.org" "[文件]: 必须是org文件，因为需要使用org-mode")
+  (defvar modeline-agenda-todo-count 0)
+  (defvar modeline-agenda-doing-count 0)
+  (defvar modeline-agenda-wait-count 0)
+  (defvar modeline-agenda-file-name "")
+
+  ;; 设置函数
+  (defun kivnn/count-agenda-file-tasks (file-path)
+    "更新指定路径议程文件的agenda信息"
+    (interactive)
+    (setq modeline-agenda-todo-count 0)
+    (setq modeline-agenda-doing-count 0)
+    (setq modeline-agenda-wait-count 0)
+    (setq modeline-agenda-file-name (file-name-nondirectory file-path))
+    ;; 打开临时buffer
+    (with-temp-buffer
+      (insert-file-contents file-path)
+      (goto-char (point-min))
+      (while (re-search-forward org-heading-regexp nil t)
+        (let ((headline (match-string 0)))
+          (cond
+           ((string-match-p "\\*+ TODO" headline) (setq modeline-agenda-todo-count (1+ modeline-agenda-todo-count)))
+           ((string-match-p "\\*+ DOING" headline) (setq modeline-agenda-doing-count (1+ modeline-agenda-doing-count)))
+           ((string-match-p "\\*+ WAIT" headline) (setq modeline-agenda-wait-count (1+ modeline-agenda-wait-count))))))))
+
+  ;; 让上述函数只对特定指定文件生效
+  ;; 从而统计所有的 "*+ TODO、*+ DOING、*+ WAIT" 的标题数量
+  ;; 并更新到 "modeline-agenda-todo-count modeline-agenda-doing-count modeline-agenda-wait-count" 变量上
+  (defun kivnn/update-modeline-agenda-file-tasks ()
+    "统计指定文件2025.org的任务"
+    (kivnn/count-agenda-file-tasks file-org-agenda-files))
+
+
+  ;; ==============================================
+  ;; 展示数据的过程
+  ;; ==============================================
+  ;; 将 "modeline-agenda-todo-count modeline-agenda-doing-count modeline-agenda-wait-count" 变量设置在modeline上
+  (defun kivnn/update-modeline-with-all-scripts ()
+    "显示modeline信息"
+    (setq global-mode-string
+          (list
+           "  "
+           (format "󰄒 TODO %d " modeline-agenda-todo-count)
+           (format "󱞿 DOING %d " modeline-agenda-doing-count)
+           (format "󰝕 WAIT %d " modeline-agenda-wait-count)
+           "-  "
+           modeline-agenda-file-name))
+    (setq-default mode-line-format
+                  '("%e"
+                    ;; a lot of things
+                    global-mode-string
+                    ;; a lot of things
+                    )))
+
+  ;; 自动版
+  (run-at-time "0 sec" 1800  'kivnn/update-modeline-agenda-file-tasks)   ; 每30分钟更新一次file-org-agenda-files变量 的指定文件的 "*+ TODO、*+ DOING、*+ WAIT" 的标题数量
+
+  ;; 手动版
+  (defun kivnn/update-modeline-all-information ()
+    "手动更新状态栏上的所有信息"
+    (interactive)
+    (kivnn/update-modeline-agenda-file-tasks) ; 手动读取 file-org-agenda-files变量 的指定文件的 "*+ TODO、*+ DOING、*+ WAIT" 的标题数量
+    (kivnn/update-modeline-with-all-scripts)) ; 然后更新modeline状态栏
+
+  ;; 设置快捷键
+  (global-set-key (kbd "C-114514")                   'kivnn/update-modeline-output-agenda-tasks)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org8d9ec70" class="outline-4">
+<h4 id="org8d9ec70"><span class="section-number-4">1.4.3.</span> 3. 去除首次打开的 <code>*Message*</code> 与 <code>*scratch*</code></h4>
+<div class="outline-text-4" id="text-1-4-3">
+<div class="org-src-container">
+<pre class="src src-elisp">(setq message-log-max nil)
+
+(defun kivnn/dashboard-mode-hook ()
+  "保证一直关闭scratch，保证只关闭第一次Message"
+  (setq-default kivnn/kill-scratch-buffer nil)
+  (when (get-buffer "*scratch*") (kill-buffer "*scratch*"))
+  (unless kivnn/kill-scratch-buffer
+    (when (get-buffer "*Messages*")
+      (kill-buffer "*Messages*")
+      (setq-default kivnn/kill-scratch-buffer t))))
+
+(defun kivnn/view-echo-area-messages ()
+  "设置message-log-max并打开*Message*的buffer"
+  (interactive)
+  (setq message-log-max 1000)
+  (view-echo-area-messages))
+
+;; 设置快捷键
+(global-set-key (kbd "C-114514")                   'kivnn/view-echo-area-messages)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgad115a3" class="outline-4">
+<h4 id="orgad115a3"><span class="section-number-4">1.4.4.</span> 4. 魔改org-latex-preview默认的dvipng命令，并在此基础上添加xelatex-chinese处理引擎</h4>
+<div class="outline-text-4" id="text-1-4-4">
+</div>
+<ol class="org-ol">
+<li><a id="orgc30208f"></a>(1) dvipng方案(dvi → png，130 DPI，字体思源雅黑CN(adobe-source-han-sans-cn-fonts))<br />
+<div class="outline-text-5" id="text-1-4-4-1">
+<div class="org-src-container">
+<pre class="src src-sh"># C-h v dvipng-image-size-adjust
+# (1.7 . 1.5)
+
+# C-h v dvipng-latex-compiler
+latex -interaction nonstopmode -output-directory %o %f
+
+# C-h v dvipng-image-converter-dpi
+# 130
+
+# C-h v dvipng-image-converter
+dvipng -D 130 -T tight -o %O %f
+
+# C-h v dvipng-transparent-image-converter
+convert -density 130 -background '#FFFFFF' -flatten -quality 100 %f %O
+</pre>
+</div>
+</div>
+</li>
+<li><a id="org24c1a03"></a>(2) xelatex-chinese方案(pdf → png，不能异步渲染，字体思源雅黑CN(adobe-source-han-sans-cn-fonts))<br />
+<div class="outline-text-5" id="text-1-4-4-2">
+<div class="org-src-container">
+<pre class="src src-sh"># C-h v xelatex-chinese-latex-header
+# "\\documentclass[11pt]{standalone}
+#                               \\usepackage{fontspec}
+#                               \\setmainfont{Source Han Sans CN}
+#                               \\setsansfont{Source Han Sans CN}
+#                               \\setmonofont{Source Han Sans CN}
+#                               \\usepackage[usenames]{color}
+#                               \\usepackage{amsmath}
+#                               \\usepackage{extpfeil}
+#                               \\pagestyle{empty}"
+
+# C-h v xelatex-chinese-image-size-adjust
+# (1.7 . 1.5)
+
+# C-h v xelatex-chinese-latex-compiler
+xelatex -interaction nonstopmode -output-directory %o %f
+
+# C-h v xelatex-chinese-image-converter
+convert -density 105 -background '#FFFFFF' -flatten -quality 100 %f %O
+</pre>
+</div>
+</div>
+</li>
+<li><a id="org849dda7"></a>(3) 配置方法<br />
+<div class="outline-text-5" id="text-1-4-4-3">
+<p>
+坑点说明
+</p>
+
+<blockquote>
+<p>
+如果想通过 [某变量] 来整体控制LaTeX图片的背景颜色的话
+那么 dvipng 就不能加上 -bg Transparent 或 -bg White 的参数
+因为 dvipng 的此颜色参数，会覆盖后面的 imagemagick 的颜色转换
+导致将来在Emacs里预览时，颜色一直都将会是 Transparent 或 White 等颜色
+</p>
+</blockquote>
+
+<p>
+配置方法
+</p>
+
+<div class="org-src-container">
+<pre class="src src-elisp">;; =========================================================================================================
+;;
+;; 自定义dvipng引擎
+;;
+;; =========================================================================================================
+;; 设置dvipng的调整图片大小
+(defvar dvipng-image-size-adjust
+  (read (format "(%f . %f)"
+                variable-latex-fragment-adjust-width
+                variable-latex-fragment-adjust-height)))
+
+;; 设置latex编译器的生成dvi文件的行为
+(defvar dvipng-latex-compiler
+  (concat "latex"                         ; 使用latex编译器来生成.dvi文件
+          " "
+          "-interaction nonstopmode"      ; 编译时遇到错误也不停下，继续编译，防止Emacs因为一些上古LaTeX2e宏包的错误而卡住
+          " "
+          "-output-directory %o"          ; 在当前目录的临时目录下，输出编译出来的产物文件
+          " "
+          "%f"                            ; Emacs临时根据当前latex-fragment生成.tex源文件，并传入到前面的编译器来编译
+          ))
+
+;; 设置dvipng转换图片程序的从dvi生成到png的行为
+(defvar dvipng-image-converter-dpi variable-ui-fonts-size)
+(defvar dvipng-image-converter
+  (concat
+   "dvipng"                               ; 将之前得到的dvi文件，转换为png的引擎程序
+   " "
+   (format "-D %d"
+           dvipng-image-converter-dpi)    ; 设置分辨率
+   " "
+   "-T tight"                             ; 自动裁剪边缘空白，防止出现大面积空白区域
+   " "
+   "-o %O"                                ; 在当前目录的临时目录下，输出编译出来的产物文件
+   " "
+   "%f"                                   ; 输入读取.dvi文件，来在下一步去转换为png文件
+   ))
+
+;; 设置imagemagick转换图片程序从png到更进一步的png的行为
+(defvar dvipng-transparent-image-converter
+  (concat
+   "convert"                              ; convert也就是imagemagick
+   " "
+   (format "-density %d"                  ; 控制像素密度
+         variable-ui-fonts-size)
+   " "
+   (format "-background '%s'"             ; 设置背景颜色
+           variable-latex-fragment-background)
+   " "
+   "-flatten"                             ; 类似PS的合并图层，需要在-background后面使用，目的是将透明区域变成带RGB通道的区域
+   " "
+   (format "-quality %d"                  ; PNG 的压缩质量(对于 PNG 影响不大，对 JPEG 很重要)
+           variable-latex-fragment-quality)
+   " "
+   "%f"                                   ; 输入读取.png文件，来载下一步去转换为magick这里设置出来的png文件
+   " "
+   "%O"                                   ; 输出magick这里设置出来的png文件的文件名占位符
+   ))
+
+
+;; ========================================
+;; dvipng: 渲染非utf-8片段引擎
+;; ========================================
+;; 删除原本的
+(setq org-preview-latex-process-alist
+      (assq-delete-all 'dvipng org-preview-latex-process-alist))
+;; 添加自己的
+(setq org-preview-latex-process-alist
+      `((dvipng
+        :programs ("latex" "dvipng" "convert")
+        :description "dvi &gt; png"
+        :message "you need to install the programs: latex and dvipng."
+        :image-input-type "dvi"
+        :image-output-type "png"
+        :image-size-adjust ,dvipng-image-size-adjust
+        :latex-compiler (,dvipng-latex-compiler)
+        :image-converter (,dvipng-image-converter)
+        :transparent-image-converter (,dvipng-transparent-image-converter))))
+
+
+
+;; =========================================================================================================
+;;
+;; 自定义xelatex-chinese引擎
+;;
+;; =========================================================================================================
+;; 设置dvipng的调整图片大小
+(defvar xelatex-chinese-image-size-adjust
+  (read (format "(%f . %f)"
+                variable-latex-fragment-adjust-width
+                variable-latex-fragment-adjust-height)))
+
+;; 设置xelatex-chinese的latex头文件
+(defvar xelatex-chinese-latex-header
+  (format "\\documentclass[%s]{standalone}
+                              \\usepackage{fontspec}
+                              \\setmainfont{%s}
+                              \\setsansfont{%s}
+                              \\setmonofont{%s}
+                              \\usepackage[usenames]{color}
+                              \\usepackage{amsmath}
+                              \\usepackage{extpfeil}
+                              \\pagestyle{empty}"
+          variable-latex-fragment-documentclass-base
+          variable-ui-fonts-source
+          variable-ui-fonts-source
+          variable-ui-fonts-source))
+
+;; 设置xelatex编译器的从pdf生成到png的行为
+(defvar xelatex-chinese-latex-compiler
+  (concat
+   "xelatex"                                    ; 使用xelatex编译器来生成.pdf文件
+   " "
+   "-interaction nonstopmode"                   ; 编译时遇到错误也不停下，继续编译，防止Emacs因为一些上古LaTeX2e宏包的错误而卡住
+   " "
+   "-output-directory %o"                       ; 在当前目录的临时目录下，输出编译出来的产物文件
+   " "
+   "%f"                                         ; Emacs临时根据当前latex-fragment生成.tex源文件，并传入到前面的编译器来编译
+   ))
+
+;; 设置imagemagick转换图片程序从png到更进一步的png的行为
+(defvar xelatex-chinese-image-converter
+  (concat
+   "convert"                                    ; convert也就是imagemagick
+   " "
+   (format "-density %d"
+           (- variable-ui-fonts-size 25))       ; 控制像素密度
+   " "
+   (format "-background '%s'"
+           variable-latex-fragment-background)  ; 设置背景颜色
+   " "
+   "-flatten"                                   ; 类似PS的合并图层，需要在-background后面使用，目的是将透明区域变成带RGB通道的区域
+   " "
+   (format "-quality %d"
+           variable-latex-fragment-quality)     ; PNG 的压缩质量(对于 PNG 影响不大，对 JPEG 很重要)
+   " "
+   "%f"                                        ; 输入读取.png文件，来载下一步去转换为magick这里设置出来的png文件
+   " "
+   "%O"                                        ; 输出magick这里设置出来的png文件的文件名占位符
+   ))
+
+
+;; ========================================
+;; xelatex-chinese: 渲染utf-8片段引擎
+;; ========================================
+(add-to-list 'org-preview-latex-process-alist
+             `(xelatex-chinese
+               :programs ("xelatex" "convert")
+               :description "pdf &gt; png"
+               :message "you need to install the programs: xelatex and dvipng."
+               :image-input-type "pdf"
+               :image-output-type "png"
+               :image-size-adjust ,xelatex-chinese-image-size-adjust
+               :latex-header ,xelatex-chinese-latex-header
+               :latex-compiler (,xelatex-chinese-latex-compiler)
+               :image-converter (,xelatex-chinese-image-converter)))
+
+
+
+;; =========================================================================================================
+;;
+;; 手动选择 org-preview-latex-default-process 来自由地切换在 dvipng(默认) 与 xelatex-chinese(自定义) 处理引擎
+;;
+;; =========================================================================================================
+  (defvar variable-latex-fragment-left-bound  "\\\("                                          "[变量]: latex-fragment的左边界")
+  (defvar variable-latex-fragment-right-bound "\\\)"                                          "[变量]: latex-fragment的右边界")
+
+  (defun kivnn/org-latex-preview-format ()
+    "渲染中文LaTeX片段之前的格式化"
+    (interactive)
+    ;; 找到左边界
+    (let ((thing (thing-at-point 'line t)))
+      (if (and thing (string-match (concat variable-latex-fragment-left-bound ".*" variable-latex-fragment-right-bound) thing))
+          (search-backward variable-latex-fragment-left-bound nil t)
+        (message "no such equation, please check again...")))
+    (forward-char 2)
+    (delete-all-space)
+    ;; 找到右边界
+    (let ((thing (thing-at-point 'line t)))
+      (if (and thing (string-match (concat variable-latex-fragment-left-bound ".*" variable-latex-fragment-right-bound) thing))
+          (search-forward variable-latex-fragment-right-bound nil t)
+        (message "no such equation, please check again...")))
+    (backward-char 3)
+    (delete-all-space))
+
+  (defun kivnn/org-latex-preview-engine ()
+    "渲染中文LaTeX片段"
+    (interactive)
+    (let* ((latex-code (thing-at-point 'line t))
+           (is-utf8 (and latex-code
+                         (string-match (concat variable-latex-fragment-left-bound ".*" variable-latex-fragment-right-bound) latex-code)
+                         (string-match-p "[^\x00-\x7F]" latex-code))))
+      (if s-utf8
+                                          ; 如果包含 UTF-8 字符，就使用 xelatex-chinese 引擎
+          progn
+        (setq org-preview-latex-default-process 'xelatex-chinese)
+        (message "目前使用了xelatex-chinese引擎渲染此LaTeX片段"))
+      ;; 如果不包含 UTF-8 字符，就使用 dvipng、dvisvgm、imagemagick 引擎
+      (setq org-preview-latex-default-process 'dvipng)
+      (message "目前使用了org-mode默认的dvipng、dvisvgm、imagemagick引擎渲染此LaTeX片段"))
+    (org-latex-preview)
+    ;; 每次执行完毕后都恢复为 dvipng、dvisvgm、imagemagick 引擎
+    (setq org-preview-latex-default-process 'dvipng)
+    (message "Creating Latex previews in section...(and recover dvipng...) done.")))
+
+  (defun kivnn/org-latex-preview ()
+    "无视fontspec包的定死字体大小的限制，强制渲染指定字体大小的LaTeX片段(才发现这个函数含金量这么足)"
+    (interactive)
+    (kivnn/org-latex-preview-format)
+    (kivnn/org-latex-preview-engine))
+
+  (define-key org-mode-map (kbd "C-1919810")             'kivnn/org-latex-preview)                          ; 无视fontspec包的定死字体大小的限制，强制渲染指定字体大小的LaTeX片段
+</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: kle</p>
+<p class="date">Created: 2025-07-20 Sun 16:48</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

@@ -1,8 +1,10 @@
 * 🔨 .emacs.d
 
-** 💡 MEME
+** 💡 Startup
 
-[[https://github.com/kitevnn/dotfiles-archlinux/blob/main/MEME/EmacsTheTrueEditor.png][EmacsTheTrueEditor]]
+[[file:archive/Startup1.png]]
+
+[[file:archive/Startup2.png]]
 
 ** 🎑 GNU Emacs快捷键风格
 
@@ -20,6 +22,10 @@
 |   10 | ~C-z C-a~             | *<a>* genda                   |
 |   11 | ~C-z C-o~             | *<o>* rg-mode                 |
 |   12 | ~C-z C-m~             | e *<m>* ms                    |
+
+** 🔔 MEME
+
+[[https://github.com/kitevnn/dotfiles-archlinux/blob/main/MEME/EmacsTheTrueEditor.png][EmacsTheTrueEditor]]
 
 ** 🔑 有趣的实现
 
@@ -82,14 +88,14 @@ Accompanying With GNU Emacs: 202 hours, 59 minutes, 49 seconds
 
   # 输出总时间
   echo "Accompanying With GNU Emacs: $total_hours hours, $remaining_minutes minutes, $remaining_seconds seconds"
-  echo "Accompanying With GNU Emacs: $total_hours hours, $remaining_minutes minutes, $remaining_seconds seconds" > "$file2"  
+  echo "Accompanying With GNU Emacs: $total_hours hours, $remaining_minutes minutes, $remaining_seconds seconds" > "$file2"
 #+end_src
 
 *elisp方面*
 #+begin_src elisp
   ;; =======================================
   ;; 路径变量 (~/.config/emacs/elisp/basic/basic-file.el)
-  ;; =======================================  
+  ;; =======================================
   (defvar directory-site-lisp               "elisp/site-lisp/sh/")                     ; emacs配置文件路径的modeline部分
 
   ;; =======================================
@@ -114,7 +120,7 @@ Accompanying With GNU Emacs: 202 hours, 59 minutes, 49 seconds
   ;; =======================================
   ;; 更新 calculate-uptime.sh 脚本输出的钩子 (~/.config/emacs/elisp/hooks/hooks-hook.el)
   ;; =======================================
-  (add-hook 'kill-emacs-hook 'my-save-emacs-uptime)                            ; 在退出Emacs时保存当前uptime  
+  (add-hook 'kill-emacs-hook 'my-save-emacs-uptime)                            ; 在退出Emacs时保存当前uptime
 #+end_src
 
 *** 2. 在modeline上展示 [议程数量] 的信息
@@ -181,7 +187,7 @@ Accompanying With GNU Emacs: 202 hours, 59 minutes, 49 seconds
            modeline-agenda-file-name))
     (setq-default mode-line-format
                   '("%e"
-                    ;; a lot of things                    
+                    ;; a lot of things
                     global-mode-string
                     ;; a lot of things
                     )))
@@ -197,7 +203,7 @@ Accompanying With GNU Emacs: 202 hours, 59 minutes, 49 seconds
     (kivnn/update-modeline-with-all-scripts)) ; 然后更新modeline状态栏
 
   ;; 设置快捷键
-  (global-set-key (kbd "C-114514")                   'kivnn/update-modeline-output-agenda-tasks)   
+  (global-set-key (kbd "C-114514")                   'kivnn/update-modeline-output-agenda-tasks)
 #+end_src
 
 *** 3. 去除首次打开的 ~*Message*~ 与 ~*scratch*~
@@ -242,7 +248,7 @@ latex -interaction nonstopmode -output-directory %o %f
 dvipng -D 130 -T tight -o %O %f
 
 # C-h v dvipng-transparent-image-converter
-convert -density 130 -background '#FFFFFF' -flatten -quality 100 %f %O  
+convert -density 130 -background '#FFFFFF' -flatten -quality 100 %f %O
 #+end_src
 
 **** (2) xelatex-chinese方案(pdf → png，不能异步渲染，字体思源雅黑CN(adobe-source-han-sans-cn-fonts))
@@ -260,13 +266,13 @@ convert -density 130 -background '#FFFFFF' -flatten -quality 100 %f %O
 #                               \\pagestyle{empty}"
 
 # C-h v xelatex-chinese-image-size-adjust
-# (1.7 . 1.5)  
-  
+# (1.7 . 1.5)
+
 # C-h v xelatex-chinese-latex-compiler
 xelatex -interaction nonstopmode -output-directory %o %f
-  
+
 # C-h v xelatex-chinese-image-converter
-convert -density 105 -background '#FFFFFF' -flatten -quality 100 %f %O  
+convert -density 105 -background '#FFFFFF' -flatten -quality 100 %f %O
 #+end_src
 
 **** (3) 配置方法
@@ -277,16 +283,16 @@ convert -density 105 -background '#FFFFFF' -flatten -quality 100 %f %O
   如果想通过 [某变量] 来整体控制LaTeX图片的背景颜色的话
   那么 dvipng 就不能加上 -bg Transparent 或 -bg White 的参数
   因为 dvipng 的此颜色参数，会覆盖后面的 imagemagick 的颜色转换
-  导致将来在Emacs里预览时，颜色一直都将会是 Transparent 或 White 等颜色  
+  导致将来在Emacs里预览时，颜色一直都将会是 Transparent 或 White 等颜色
 #+end_quote
 
 配置方法
 
 #+begin_src elisp
-;; =========================================================================================================  
-;;   
+;; =========================================================================================================
+;;
 ;; 自定义dvipng引擎
-;;     
+;;
 ;; =========================================================================================================
 ;; 设置dvipng的调整图片大小
 (defvar dvipng-image-size-adjust
@@ -363,12 +369,12 @@ convert -density 105 -background '#FFFFFF' -flatten -quality 100 %f %O
         :transparent-image-converter (,dvipng-transparent-image-converter))))
 
 
-  
-;; =========================================================================================================  
-;;   
+
+;; =========================================================================================================
+;;
 ;; 自定义xelatex-chinese引擎
-;;     
-;; =========================================================================================================  
+;;
+;; =========================================================================================================
 ;; 设置dvipng的调整图片大小
 (defvar xelatex-chinese-image-size-adjust
   (read (format "(%f . %f)"
@@ -441,11 +447,11 @@ convert -density 105 -background '#FFFFFF' -flatten -quality 100 %f %O
                :image-converter (,xelatex-chinese-image-converter)))
 
 
-  
+
 ;; =========================================================================================================
-;;   
+;;
 ;; 手动选择 org-preview-latex-default-process 来自由地切换在 dvipng(默认) 与 xelatex-chinese(自定义) 处理引擎
-;;     
+;;
 ;; =========================================================================================================
   (defvar variable-latex-fragment-left-bound  "\\\("                                          "[变量]: latex-fragment的左边界")
   (defvar variable-latex-fragment-right-bound "\\\)"                                          "[变量]: latex-fragment的右边界")
@@ -494,5 +500,5 @@ convert -density 105 -background '#FFFFFF' -flatten -quality 100 %f %O
     (kivnn/org-latex-preview-format)
     (kivnn/org-latex-preview-engine))
 
-  (define-key org-mode-map (kbd "C-1919810")             'kivnn/org-latex-preview)                          ; 无视fontspec包的定死字体大小的限制，强制渲染指定字体大小的LaTeX片段  
+  (define-key org-mode-map (kbd "C-1919810")             'kivnn/org-latex-preview)                          ; 无视fontspec包的定死字体大小的限制，强制渲染指定字体大小的LaTeX片段
 #+end_src
