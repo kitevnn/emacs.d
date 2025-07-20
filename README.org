@@ -6,6 +6,37 @@
 
 [[file:archive/Startup2.png]]
 
+*** 🥕 基本的信息
+
+| 序号 | 信息        | 解释                 |
+|------+-------------+----------------------|
+|    1 | 环境        | WSL2(2.5.9.0)        |
+|    2 | OS发行版    | WSL-archlinux 2.4.13 |
+|    3 | Emacs发行版 | GNU Emacs            |
+|    4 | 分支        | emacs-feature-igc    |
+
+*** 🪓 开启的特性
+
+#+begin_src sh
+CFLAGS="-fmax-errors=1000" ./configure \
+    --sysconfdir=/etc \                   # 配置文件默认安装到 /etc
+    --prefix=/usr \                       # 安装根路径为 /usr（不是 /usr/local）
+    --libexecdir=/usr/lib \               # 内部 helper 程序装到 /usr/lib
+    --localstatedir=/var \                # 本地变量文件路径（如缓存）设为 /var
+    --disable-build-details \             # 不写入构建时间/主机信息，提高构建可重现性
+    --with-harfbuzz \                     # 启用 HarfBuzz，提升字体渲染质量（支持 ligatures）
+    --with-libsystemd \                   # 启用对 systemd 的支持
+    --with-modules \                      # 启用 Emacs 动态模块支持（支持外部模块）
+    --with-x-toolkit=gtk3 \               # 使用 GTK3 图形界面（X11）
+    --with-mps=yes \                      # 启用 memory pool system（Emacs GC 的替代实现）
+    --with-gnutls=ifavailable \           # 启用 GnuTLS 网络安全库（SSL/TLS），如果有的话（在从elpa获取包安装及更新需要用到）
+    --with-rsvg \                         # 开启 rsvg（SVG 支持）
+    --with-imagemagick \                  # 开启 ImageMagick 支持
+    --with-tree-sitter=ifavailable \      # 使用 tree-sitter（语法高亮引擎）如果可用
+    'CFLAGS=-march=x86-64 -mtune=generic -O2 -pipe -fno-plt -fexceptions -Wp,-D_FORTIFY_SOURCE=3 -Wformat -Werror=format-security -fstack-clash-protection -fcf-protection -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -g -ffile-prefix-map=/build/emacs/src=/usr/src/debug/emacs -flto=auto' \
+    'LDFLAGS=-Wl,-O1 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now -Wl,-z,pack-relative-relocs -flto=auto'   
+#+end_src
+
 ** 🎑 GNU Emacs快捷键风格
 
 | 序号 | 快捷键前缀(prefix-key) | 解释意义                       |
