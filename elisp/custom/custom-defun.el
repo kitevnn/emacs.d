@@ -575,27 +575,32 @@
 (defun kivnn/magit-commit-template-archlinux ()
   "个人提交信息模板: 第1次询问标题，第2次询问子项数量，在ArchLinux环境"
   (interactive)
-  (let* ((software (read-string "what's been changed (GNU Emacs by default): " "GNU Emacs"))
-         (item-count (read-number "the count of items (1 by default): " 1))
-         (commit-msg (concat "[ArchLinux环境]: " "更新了 " software " 配置文件\n\n"
-                             (mapconcat (lambda (_) "+ ") (make-list item-count "+ ") "\n\n"))))
+  (let* ((software
+          (read-string "what's been changed (GNU Emacs by default): " "GNU Emacs"))
+         (item-count (read-number "the count of items (0 by default): " 0))
+         (commit-msg (concat "[ArchLinux " software "环境]: "
+                             (mapconcat (lambda (_) "+ ") (make-list item-count nil) "\n\n"))))
     (insert commit-msg)
     (beginning-of-buffer)
     (beginning-of-visual-line)
     (next-line 2)
+    (end-of-visual-line)
+    (beginning-of-buffer)
     (end-of-visual-line)))
 
 (defun kivnn/magit-commit-template-wsl-archlinux ()
   "个人提交信息模板: 第1次询问标题，第2次询问子项数量，在WSL-ArchLinux环境"
   (interactive)
   (let* ((software (read-string "what's been changed (GNU Emacs by default): " "GNU Emacs"))
-         (item-count (read-number "the count of items (1 by default): " 1))
-         (commit-msg (concat "[WSL环境]: " "更新了 " software " 配置文件\n\n"
-                             (mapconcat (lambda (_) "+ ") (make-list item-count "+ ") "\n\n"))))
+         (item-count (read-number "the count of items (0 by default): " 0))
+         (commit-msg (concat "[WSL " software "环境]: "
+                             (mapconcat (lambda (_) "+ ") (make-list item-count nil) "\n\n"))))
     (insert commit-msg)
     (beginning-of-buffer)
     (beginning-of-visual-line)
     (next-line 2)
+    (end-of-visual-line)
+    (beginning-of-buffer)
     (end-of-visual-line)))
 
 
