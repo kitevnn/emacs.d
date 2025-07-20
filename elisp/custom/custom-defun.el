@@ -611,13 +611,30 @@
   "括号匹配parentheses"
   (interactive "P")
   (cond
-   ;; 括号匹配: () [] {}
+   ;; 半角匹配字符(fb-sexp实现)
    ((eq (char-after) ?\() (forward-sexp 1))
    ((eq (char-after) ?\[) (forward-sexp 1))
    ((eq (char-after) ?\{) (forward-sexp 1))
    ((eq (char-before) ?\)) (backward-sexp 1))
    ((eq (char-before) ?\]) (backward-sexp 1))
-   ((eq (char-before) ?\}) (backward-sexp 1))))
+   ((eq (char-before) ?\}) (backward-sexp 1))
+   ;; 全角匹配字符(search-fb实现)
+   ((eq (char-after) ?\（) (search-forward "）"))
+   ((eq (char-after) ?\［) (search-forward "］"))
+   ((eq (char-after) ?\「) (search-forward "」"))
+   ((eq (char-after) ?\｛) (search-forward "｝"))
+   ((eq (char-after) ?\『) (search-forward "』"))
+   ((eq (char-after) ?\〖) (search-forward "〗"))
+   ((eq (char-after) ?\‘) (search-forward "’"))
+   ((eq (char-after) ?\“) (search-forward "”"))
+   ((eq (char-before) ?\）) (search-forward "）"))
+   ((eq (char-before) ?\］) (search-forward "］"))
+   ((eq (char-before) ?\」) (search-forward "」"))
+   ((eq (char-before) ?\｝) (search-forward "｝"))
+   ((eq (char-before) ?\』) (search-forward "』"))
+   ((eq (char-before) ?\〗) (search-forward "〗"))
+   ((eq (char-before) ?\’) (search-forward "’"))
+   ((eq (char-before) ?\”) (search-forward "”"))))
 
 
 ;; =======================================
