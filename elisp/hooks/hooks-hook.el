@@ -15,6 +15,7 @@
 ;; 完成初始化后的钩子hook
 ;; ========================================
 (add-hook 'after-init-hook                              'kivnn/after-init-hook)                  ; 初始化钩子
+(add-hook 'after-init-hook                              'kivnn/cleanup-emms-history)             ; 初始化emms
 
 
 ;; ========================================

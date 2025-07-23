@@ -11,6 +11,7 @@
 (defvar directory-music                              "~/音乐/"                                       "[目录]: music的保存目录")
 (defvar directory-backup-directory-alist             "~/.emacs.d/saves/"                            "[目录]: 恢复文件的保存目录")
 (defvar directory-emacs-archive                      "~/.emacs.d/archive/"                          "[目录]: emacs-archive的保存目录")
+(defvar directory-emacs-emms                         "~/.emacs.d/emms/"                             "[目录]: emms-archive的保存目录")
 (defvar directory-modeline-path-suffix               "elisp/site-lisp/sh/"                          "[目录]: GNU Emacs配置文件路径的modeline部分")
 (defvar directory-site-lisp                          "elisp/site-lisp/sh/"                          "[目录]: GNU Emacs配置文件路径的modeline部分")
 

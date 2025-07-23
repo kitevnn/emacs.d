@@ -658,6 +658,12 @@
       (call-interactively 'emms-play-directory)
     (call-interactively 'emms)))
 
+(defun kivnn/cleanup-emms-history ()
+  "清理emms的history历史播放文件在recentf里"
+  (interactive)
+  (add-to-list 'recentf-exclude
+               (recentf-expand-file-name (concat directory-emacs-emms "history")))
+  (recentf-cleanup))
 
 ;; =======================================
 ;; 关于face
