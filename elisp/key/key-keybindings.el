@@ -75,8 +75,12 @@
 ;; 关于选区
 ;; ========================================
 (global-set-key (kbd "C-z C-z C-c")                      'set-mark-command)                                ; 进入单行选区
+(global-set-key (kbd "C-z C-c")                          'set-mark-command)                                ; 进入单行选区
 (global-set-key (kbd "C-z C-x C-c")                      'rectangle-mark-mode)                             ; 进入矩形选区
 (global-set-key (kbd "C-c SPC")                          'rectangle-mark-mode)                             ; 进入矩形选区
+(global-set-key (kbd "C-z C-x C-k")                      'kill-rectangle)                                  ; 剪切矩形选区
+(global-set-key (kbd "C-z C-x C-y")                      'yank-rectangle)                                  ; 粘贴矩形选区
+(global-set-key (kbd "C-z C-x C-d")                      'delete-rectangle)                                ; 删除矩形选区
 (global-set-key (kbd "C-z C-z C-s")                      'kivnn/expand-region-like-vim-find-char)          ; 在选区模式下模拟一次vim的f(find char)行为
 
 
