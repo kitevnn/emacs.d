@@ -75,7 +75,7 @@ Accompanying With GNU Emacs: 202 hours, 59 minutes, 49 seconds
   #!/bin/bash
 
   # 基本路径配置
-  user="une"
+  user="kle"
   path1=".config/emacs/archive"
   path2=".config/emacs/elisp/site-lisp/sh"
   filename="uptime"
