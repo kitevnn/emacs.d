@@ -37,6 +37,8 @@ CFLAGS="-fmax-errors=1000" ./configure \
     'LDFLAGS=-Wl,-O1 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now -Wl,-z,pack-relative-relocs -flto=auto'   
 #+end_src
 
+[[https://colfwe.github.io/docs/%E5%9C%A8Windows11-WSL%E4%B8%8A%E4%BD%BF%E7%94%A8emacs-feature-igc-31050-%E5%8C%85%E6%8B%AClibmps%E5%8C%85%E6%8B%AClibgccjit.html][GNU Emacs 在 WSL2 上的安装教程]]
+
 ** 🎑 GNU Emacs快捷键风格
 
 | 序号 | 快捷键前缀(prefix-key) | 解释意义                       |
