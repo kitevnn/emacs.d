@@ -513,7 +513,7 @@ convert -density 105 -background '#FFFFFF' -flatten -quality 100 %f %O
                          (string-match (concat variable-latex-fragment-left-bound ".*" variable-latex-fragment-right-bound) latex-code)
                          (string-match-p "[^\x00-\x7F]" latex-code))))
       (if s-utf8
-                                          ; 如果包含 UTF-8 字符，就使用 xelatex-chinese 引擎
+          ; 如果包含 UTF-8 字符，就使用 xelatex-chinese 引擎
           progn
         (setq org-preview-latex-default-process 'xelatex-chinese)
         (message "目前使用了xelatex-chinese引擎渲染此LaTeX片段"))
