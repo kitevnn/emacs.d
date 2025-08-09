@@ -638,6 +638,42 @@
 
 
 ;; =======================================
+;; 关于文本环绕
+;; =======================================
+(defun kivnn/org-emphasis-char (char)
+  (interactive)
+  (if (use-region-p)
+      (let ((pos (point)))
+        (org-emphasize char)
+        (goto-char pos))
+    (org-emphasize char)))
+
+(defun kivnn/org-emphasis-bold ()
+  (interactive)
+  (kivnn/org-emphasis-char ?*))
+
+(defun kivnn/org-emphasis-italic ()
+  (interactive)
+  (kivnn/org-emphasis-char ?_))
+
+(defun kivnn/org-emphasis-underline ()
+  (interactive)
+  (kivnn/org-emphasis-char ?+))
+
+(defun kivnn/org-emphasis-deleteline ()
+  (interactive)
+  (kivnn/org-emphasis-char ?*))
+
+(defun kivnn/org-emphasis-code ()
+  (interactive)
+  (kivnn/org-emphasis-char ?~))
+
+(defun kivnn/org-emphasis-verbatim ()
+  (interactive)
+  (kivnn/org-emphasis-char ?=))
+
+
+;; =======================================
 ;; 关于音乐前进后退emms
 ;; =======================================
 (defun emms-seek-forward-minute ()

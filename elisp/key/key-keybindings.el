@@ -168,6 +168,12 @@
 (define-key org-mode-map (kbd "C-z C-o C-t C-t C-t")     'kivnn/org-download-delete)                       ; 删除图片信息并删除图片文件
 (define-key org-mode-map (kbd "C-z C-z C-\i C-\i C-\i")  'org-preview-html-mode)                           ; 实时预览org
 (define-key org-mode-map (kbd "C-z C-z C-l")             'kivnn/org-latex-preview)                         ; 无视fontspec包的定死字体大小的限制，强制渲染指定字体大小的LaTeX片段
+(define-key org-mode-map (kbd "C-z C-o C-b")             'kivnn/org-emphasis-bold)                         ; 为org-mode在region下的文本添加粗体修饰
+(define-key org-mode-map (kbd "C-z C-o C-i")             'kivnn/org-emphasis-italic)                       ; 为org-mode在region下的文本添加斜体修饰
+(define-key org-mode-map (kbd "C-z C-o C-l")             'kivnn/org-emphasis-underline)                    ; 为org-mode在region下的文本添加下划线修饰
+(define-key org-mode-map (kbd "C-z C-o C-d")             'kivnn/org-emphasis-deleteline)                   ; 为org-mode在region下的文本添加删除线修饰
+(define-key org-mode-map (kbd "C-z C-o C-c")             'kivnn/org-emphasis-code)                         ; 为org-mode在region下的文本添加代码修饰
+(define-key org-mode-map (kbd "C-z C-o C-v")             'kivnn/org-emphasis-verbatim)                     ; 为org-mode在region下的文本添加代码块修饰
 
 
 ;; ========================================
