@@ -173,7 +173,7 @@
 (define-key org-mode-map (kbd "C-z C-o C-l")             'kivnn/org-emphasis-underline)                    ; 为org-mode在region下的文本添加下划线修饰
 (define-key org-mode-map (kbd "C-z C-o C-d")             'kivnn/org-emphasis-deleteline)                   ; 为org-mode在region下的文本添加删除线修饰
 (define-key org-mode-map (kbd "C-z C-o C-c")             'kivnn/org-emphasis-code)                         ; 为org-mode在region下的文本添加代码修饰
-(define-key org-mode-map (kbd "C-z C-o C-v")             'kivnn/org-emphasis-verbatim)                     ; 为org-mode在region下的文本添加代码块修饰
+(define-key org-mode-map (kbd "C-z C-o C-j")             'kivnn/org-emphasis-verbatim)                     ; 为org-mode在region下的文本添加借用修饰
 
 
 ;; ========================================
