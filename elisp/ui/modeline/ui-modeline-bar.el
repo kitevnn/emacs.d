@@ -118,7 +118,7 @@
         (let ((uptime-text
                (string-trim
                 (shell-command-to-string
-                 (concat user-emacs-directory directory-site-lisp "calculate-uptime.sh")))))
+                 (concat user-emacs-directory directory-site-lisp "acc-uptime.sh")))))
           (if (string-match "Accompanying With GNU Emacs: \\([0-9]+\\) hours, \\([0-9]+\\) minutes, \\([0-9]+\\) seconds" uptime-text)
               (format "%sh %sm" (match-string 1 uptime-text) (match-string 2 uptime-text))))))
 ;; ========================================

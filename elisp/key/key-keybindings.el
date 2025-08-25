@@ -320,7 +320,7 @@
 ;; ========================================
 ;; 关于GNU Emacs
 ;; ========================================
-(global-set-key (kbd "C-z C-z C-\.")                   'kivnn/show-emacs-uptime)                           ; 累计使用GNU Emacs的总时长(site-lisp的bash实现)
+(global-set-key (kbd "C-z C-z C-\.")                   'kivnn/about-emacs-uptime)                          ; 关于使用累计GNU Emacs的总时长
 
 
 (provide 'key-keybindings)

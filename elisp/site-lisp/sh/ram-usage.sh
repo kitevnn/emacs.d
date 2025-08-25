@@ -1,3 +1,5 @@
+#!/bin/bash
+
 ram_usage=$(free -h | awk '{print $2}' | sed -n '2p' | sed 's/[^0-9.]//g' | awk '{print int($1)}')
 ram_used=$(free -h | awk '{print $3}' | sed -n '2p' | sed 's/[^0-9.]//g' | awk '{print int($1)}')
 

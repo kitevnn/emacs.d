@@ -527,10 +527,22 @@
   (interactive)
   (let ((uptime-output
          (string-trim (shell-command-to-string
-                       (concat user-emacs-directory directory-site-lisp "calculate-uptime.sh")))))
+                       (concat user-emacs-directory directory-site-lisp "acc-uptime.sh")))))
     (if (derived-mode-p 'org-mode)
         (insert uptime-output)
       (message "%s" uptime-output))))
+
+(defun kivnn/calculate-emacs-uptime ()
+  "通过site-lisp的bash脚本来积累相加所有的单次时长"
+  (shell-command
+   (concat user-emacs-directory directory-modeline-path-suffix "calculate-uptime.sh")))
+
+(defun kivnn/about-emacs-uptime ()
+  "C-u + key来积累相加单次时长，key 来显示总时长"
+  (interactive)
+  (if current-prefix-arg
+      (kivnn/calculate-emacs-uptime)
+    (kivnn/show-emacs-uptime)))
 
 
 ;; =======================================
