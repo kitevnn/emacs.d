@@ -313,7 +313,7 @@
 ;; ========================================
 ;; 关于状态仪表盘
 ;; ========================================
-(global-set-key (kbd "C-z C-z C-,")                    'kivnn/status-monitor-start)                        ; 打开状态仪表盘
+(global-set-key (kbd "C-z C-z C-;")                    'kivnn/status-monitor-start)                        ; 打开状态仪表盘
 (global-set-key (kbd "C-z C-z C-'")                    'kivnn/status-monitor-stop)                         ; 关闭状态仪表盘
 
 
