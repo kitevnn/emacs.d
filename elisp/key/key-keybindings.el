@@ -43,6 +43,14 @@
 
 
 ;; ========================================
+;; 关于windows
+;; ========================================
+(global-set-key (kbd "C-z C-v C-v")                      'delete-other-windows)                            ; 只保留当前窗口(C-x 1)
+(global-set-key (kbd "C-z C-v C-n")                      'split-window-below)                              ; 向下分割窗口(C-x 2)
+(global-set-key (kbd "C-z C-v C-f")                      'split-window-right)                              ; 向右分割窗口(C-x 3)
+
+
+;; ========================================
 ;; 关于frame
 ;; ========================================
 (global-set-key (kbd "C-z C-f C-c")                      'clone-frame)                                     ; 克隆复制一个当前的frame
