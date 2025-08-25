@@ -7,7 +7,7 @@
   (dashboard-setup-startup-hook)
   :init
   (setq dashboard-banner-logo-title "p😭q 真正的编辑器: GNU Emacs"
-        dashboard-startup-banner    "/home/une/.wallpaper/dashboard-zoom-out-light.png"
+        dashboard-startup-banner    (concat directory-emacs-archive "dashboard-zoom-out-light.png")
         dashboard-center-content t
         dashboard-vertically-center-content t
         dashboard-show-shortcuts nil)
