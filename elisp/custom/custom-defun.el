@@ -251,6 +251,14 @@
              `((telega-msg-heading                              :background "#ffffff")
                (help-key-binding                                :background "#ffffff" :foreground "#673ab7" :height ,variable-ui-fonts-size :box nil)))
       (apply #'set-face-attribute (car face-attr) nil (cdr face-attr))))
+  ;; 亮色centaur-tabs
+  (with-eval-after-load 'centaur-tabs
+    (dolist (face-attr
+             `((centaur-tabs-selected                                                                       :height 1.0)
+               (centaur-tabs-selected-modified                                                              :height 1.0)
+               (centaur-tabs-unselected                                                                     :height 1.0)
+               (centaur-tabs-unselected-modified                                                            :height 1.0)))
+      (apply #'set-face-attribute (car face-attr) nil (cdr face-attr))))
   ;; 亮色magit
   (with-eval-after-load 'magit
     (dolist (face-attr '(;; 一级界面
@@ -378,6 +386,13 @@
     (dolist (face-attr
              `((telega-msg-heading                              :background "#191919")
                (help-key-binding                                :background "#191919" :foreground "#64fbc8" :height ,variable-ui-fonts-size :box nil)))
+      (apply #'set-face-attribute (car face-attr) nil (cdr face-attr))))
+  (with-eval-after-load 'centaur-tabs
+    (dolist (face-attr
+             `((centaur-tabs-selected                                                                       :height 1.0)
+               (centaur-tabs-selected-modified                                                              :height 1.0)
+               (centaur-tabs-unselected                                                                     :height 1.0)
+               (centaur-tabs-unselected-modified                                                            :height 1.0)))
       (apply #'set-face-attribute (car face-attr) nil (cdr face-attr))))
   ;; 暗色magit
   (with-eval-after-load 'magit
