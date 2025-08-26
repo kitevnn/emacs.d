@@ -835,6 +835,17 @@
 
 
 ;; =======================================
+;; 同步emacs.d配置文件
+;; =======================================
+(defun kivnn/sync-emacs-configuration ()
+  "同步emacs.d配置文件到~/.gh/emacs.d"
+  (interactive)
+  (when (y-or-n-p "Do u wanna copy configuration to ~/.gh/emacs.d ?")
+    (let* ((script-path (expand-file-name (concat user-emacs-directory directory-site-lisp "sync-configuration.sh"))))
+      (shell-command script-path))))
+
+
+;; =======================================
 ;; 关于状态仪表盘
 ;; =======================================
 (defvar modeline-modes "")

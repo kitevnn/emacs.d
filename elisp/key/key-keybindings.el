@@ -320,6 +320,7 @@
 ;; ========================================
 ;; 关于GNU Emacs
 ;; ========================================
+(global-set-key (kbd "C-z C-p C-c")                    'kivnn/sync-emacs-configuration)                    ; 关于同步配置文件
 (global-set-key (kbd "C-z C-z C-\.")                   'kivnn/about-emacs-uptime)                          ; 关于使用累计GNU Emacs的总时长
 
 
