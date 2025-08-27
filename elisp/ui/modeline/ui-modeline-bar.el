@@ -207,11 +207,10 @@
          modeline-agenda-file-name))
   (setq kivnn/mode-line-file-location
         '(:eval (if buffer-file-name
-                    (concat "("
+                    (concat " 󱢗 ("
                             (kivnn/get-mode-line-shorter-info (propertize (file-name-directory buffer-file-name)
-                                                                          'face 'mode-line-path))
-                            ")"))
-                " "))
+                                                                          'face 'mode-line-path)) ")"
+                            ))))
   ;;; 常量modeline信息放里面setq-default
   (setq-default mode-line-format
                 (list
