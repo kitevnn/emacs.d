@@ -205,12 +205,6 @@
          (format "󰝕 WAIT %d " modeline-agenda-wait-count)
          "-  "
          modeline-agenda-file-name))
-  (setq kivnn/mode-line-file-location
-        '(:eval (if buffer-file-name
-                    (concat " 󱢗 ("
-                            (kivnn/get-mode-line-shorter-info (propertize (file-name-directory buffer-file-name)
-                                                                          'face 'mode-line-path)) ")"
-                            ))))
   ;;; 常量modeline信息放里面setq-default
   (setq-default mode-line-format
                 (list
@@ -219,7 +213,6 @@
                  '(:eval kivnn/mode-line-modified)
                  "  "
                  '(:eval (kivnn/get-mode-line-shorter-info mode-line-buffer-identification))
-                 '(:eval kivnn/mode-line-file-location)
                  '(:eval (when vc-mode vc-mode))
                  "   "
                  '(:eval (format "%s" modeline-calendar-month))

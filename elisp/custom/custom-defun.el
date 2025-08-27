@@ -870,6 +870,15 @@
         (format-mode-line mode-line-modes)))
 (run-at-time "0 sec" 180 'kivnn/update-modeline-modes)
 
+(defvar mode-line-file-location)
+(defun kivnn/update-file-location ()
+  "定时更新文件位置信息，并显示在仪表盘上"
+  (setq mode-line-file-location
+        (if buffer-file-name
+            (kivnn/get-mode-line-shorter-info (propertize (file-name-directory buffer-file-name)
+                                                          'face 'mode-line-path)))))
+(run-at-time "0 sec" 15 'kivnn/update-file-location)
+
 (defun kivnn/status-monitor-update ()
   "状态仪表盘"
   (let ((buf (get-buffer-create "*Status Monitor*")))
@@ -887,6 +896,7 @@
         (insert (format "🎧 正在播放: %s\n" emms-mode-line-string))
         (insert (format "⌛ 时间：%s\n" (format-time-string "%H:%M")))
         (insert (format "💼 模式信息: %s\n" modeline-modes))
+        (insert (format "🌳 文件位置: %s\n" mode-line-file-location))
         (setq buffer-read-only t)))))
 
 (defun kivnn/status-monitor-start ()
