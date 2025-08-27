@@ -177,6 +177,12 @@
 ;; ========================================
 ;; 关于modeline
 ;; ========================================
+(defun kivnn/get-mode-line-shorter-info (name)
+  "保证modeline信息不超过20个字符"
+  (if (> (length name) 20)
+      (concat (substring name 0 17) "...")
+    name))
+
 (defun kivnn/update-modeline-with-all-scripts ()
   "手动搓出modeline信息"
   ;;; 变量modeline信息放外边setq
@@ -199,6 +205,13 @@
          (format "󰝕 WAIT %d " modeline-agenda-wait-count)
          "-  "
          modeline-agenda-file-name))
+  (setq kivnn/mode-line-file-location
+        '(:eval (if buffer-file-name
+                    (concat "("
+                            (kivnn/get-mode-line-shorter-info (propertize (file-name-directory buffer-file-name)
+                                                                          'face 'mode-line-path))
+                            ")"))
+                " "))
   ;;; 常量modeline信息放里面setq-default
   (setq-default mode-line-format
                 (list
@@ -206,7 +219,8 @@
                  '(:eval mode-line-mule-info)
                  '(:eval kivnn/mode-line-modified)
                  "  "
-                 '(:eval mode-line-buffer-identification)
+                 '(:eval (kivnn/get-mode-line-shorter-info mode-line-buffer-identification))
+                 '(:eval kivnn/mode-line-file-location)
                  '(:eval (when vc-mode vc-mode))
                  "   "
                  '(:eval (format "%s" modeline-calendar-month))
