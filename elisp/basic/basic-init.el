@@ -66,8 +66,8 @@
 ;; =======================================
 (setq backup-directory-alist
       `(("." . ,directory-backup-directory-alist)))                   ; 统一设置恢复文件的保存目录，而不污染当前同级目录
-(setq backup-by-copying t)                                            ; 设置保存形式
 (setq-default auto-save-no-message t)                                 ; 禁用自动保存的消息提示
+(setq backup-by-copying t)                                            ; 设置保存形式
 (setq delete-old-versions t
   kept-new-versions 6
   kept-old-versions 2
