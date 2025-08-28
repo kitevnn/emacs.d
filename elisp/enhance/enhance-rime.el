@@ -8,7 +8,7 @@
   (default-input-method "rime")
   :init
   (setq rime-title
-        (concat " " "飞" " ")))
+        (concat " " "双" " ")))
 
 
 (provide 'enhance-rime)
