@@ -34,5 +34,5 @@ remaining_seconds=$(( total_seconds % 3600 ))
 final_minutes=$(( remaining_seconds / 60 ))
 final_seconds=$(( remaining_seconds % 60 ))
 
-echo "Finsish: $hours hours, $minutes minutes, $seconds seconds"
+echo "Finish: $hours hours, $minutes minutes, $seconds seconds"
 echo "Accompanying With GNU Emacs: $final_hours hours, $final_minutes minutes, $final_seconds seconds" > "$file1"
