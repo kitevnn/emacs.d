@@ -8,7 +8,7 @@
   (default-input-method "rime")
   :init
   (setq rime-title
-        (concat " " "ㄓ" " ")))
+        (concat " " "自" " ")))
 
 
 (provide 'enhance-rime)
