@@ -147,6 +147,7 @@
 ;; ========================================
 ;; 关于org-mode
 ;; ========================================
+(define-key org-mode-map (kbd "C-,")                     'nil)                                             ; 屏蔽org-agenda-file原快捷键
 (define-key org-mode-map (kbd "C-z C-x C-0")             'valign-mode)                                     ; 切换valign-mode
 (define-key org-mode-map (kbd "C-c C-x C-v")             'kivnn/toggle-inline-images-with-valign)          ; 用 C-c C-x C-v 避免valign-mode造成的对齐卡顿来预览图片
 (define-key org-mode-map (kbd "C-z C-x C-f")             'kivnn/jump-the-ending-of-the-latex-fragment)     ; 当光标在公式块上下文时，光标跳转到公式块的左边界
