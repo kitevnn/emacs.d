@@ -746,49 +746,6 @@
 
 
 ;; =======================================
-;; 关于org-download
-;; =======================================
-(defun kivnn/set-org-download-dir ()
-  "将org-download剪贴板图片保存在当前org所在目录的png/下"
-  (when (and buffer-file-name (file-name-directory buffer-file-name))
-    (setq-local org-download-image-dir
-                (concat (file-name-directory buffer-file-name) "png/"))
-    ;; 如果png/目录不存在则创建
-    (unless (file-exists-p org-download-image-dir)
-      (make-directory org-download-image-dir t))))
-(add-hook 'org-mode-hook #'kivnn/set-org-download-dir)
-
-(defun kivnn/org-download-clipboard-and-rename ()
-  "先保存org-download剪贴板图片再重命名图片文件名"
-  (interactive)
-  (org-download-clipboard)
-  (previous-line)
-  (kivnn/toggle-inline-images-with-valign)
-  (org-beginning-of-line)
-  (org-download-rename-at-point)
-  (move-beginning-of-line)
-  (kill-line))
-
-(defun kivnn/org-download-delete ()
-  "格式化光标来删除org-download图片信息"
-  (interactive)
-  (if (looking-at "^#\\+DOWNLOADED:")
-      (org-download-delete)
-    (when (re-search-backward "^#\\+DOWNLOADED: " nil t)
-      (org-download-delete))))
-
-(defun kivnn/org-download-rename-at-point ()
-  "格式化光标来重命名org-download图片信息"
-  (interactive)
-  (if (looking-at "^#\\+DOWNLOADED:")
-      (progn (next-line)
-             (org-download-rename-at-point))
-    (when (re-search-backward "^#\\+DOWNLOADED: " nil t)
-      (progn (next-line)
-             (org-download-rename-at-point)))))
-
-
-;; =======================================
 ;; 动态选择引擎来渲染
 ;; =======================================
 (defun kivnn/org-latex-preview-format ()
