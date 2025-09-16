@@ -832,8 +832,8 @@
   "定时更新文件位置信息，并显示在仪表盘上"
   (setq mode-line-file-location
         (if buffer-file-name
-            (kivnn/get-mode-line-shorter-info (propertize (file-name-directory buffer-file-name)
-                                                          'face 'mode-line-path)))))
+            (propertize (file-name-directory buffer-file-name)
+                        'face 'mode-line-path))))
 (run-at-time "0 sec" 15 'kivnn/update-file-location)
 
 (defun kivnn/status-monitor-update ()

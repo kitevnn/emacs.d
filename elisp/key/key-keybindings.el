@@ -172,9 +172,6 @@
 (define-key org-mode-map (kbd "C-z C-a C-a")             'kivnn/org-agenda-change-headline-to-todo)        ; 将当前任务状态改为TODO
 (global-unset-key (kbd "C-,"))                                                                             ; 屏蔽C-, (原功能: 直接进入org-agenda-files)
 (global-set-key (kbd "C-z C-a C-,")                      'org-cycle-agenda-files)                          ; 直接进入org-agenda-files
-(define-key org-mode-map (kbd "C-z C-o C-a")             'kivnn/org-download-clipboard-and-rename)         ; 先保存剪贴板图片再重命名图片文件名
-(define-key org-mode-map (kbd "C-z C-o C-r")             'kivnn/org-download-rename-at-point)              ; 重命名图片信息并重命名图片文件
-(define-key org-mode-map (kbd "C-z C-o C-t C-t C-t")     'kivnn/org-download-delete)                       ; 删除图片信息并删除图片文件
 (define-key org-mode-map (kbd "C-z C-z C-\i C-\i C-\i")  'org-preview-html-mode)                           ; 实时预览org
 (define-key org-mode-map (kbd "C-z C-z C-l")             'kivnn/org-latex-preview)                         ; 无视fontspec包的定死字体大小的限制，强制渲染指定字体大小的LaTeX片段
 (define-key org-mode-map (kbd "C-z C-o C-b")             'kivnn/org-emphasis-bold)                         ; 为org-mode在region下的文本添加粗体修饰
